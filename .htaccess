@@ -1,0 +1,12 @@
+Options -Indexes
+
+# --- Security: block sensitive paths when served from Laragon docroot ---
+RewriteEngine On
+RewriteRule ^(\.env|\.git|inc/|storage/|bin/|docs/) - [F,L]
+
+# --- Serve the public/ folder as the web root ---
+DirectoryIndex public/index.php
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ public/$1 [L]

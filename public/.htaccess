@@ -1,0 +1,4 @@
+Options -Indexes
+
+# Deny dotfiles (e.g. .env, .git)
+RewriteRule (^\.|/\.) - [F,L]

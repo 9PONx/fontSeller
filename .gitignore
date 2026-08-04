@@ -1,0 +1,16 @@
+# Environment & secrets
+.env
+
+# Storage: runtime data, caches, product zips, logs
+storage/*
+!storage/.gitkeep
+
+# Local dev / agent working notes
+.superpowers/
+
+# OS / editor
+Thumbs.db
+.DS_Store
+*.swp
+.idea/
+.vscode/
