@@ -123,7 +123,7 @@ const Payments = {
     /* ---------------- Payment attempts ---------------- */
 
     attemptCreate(orderId, provider, fingerprint) {
-        return Store.insert(CONFIG.keyAttempts, {
+        const row = Store.insert(CONFIG.keyAttempts, {
             order_id: orderId,
             provider,
             provider_reference: null,
@@ -134,6 +134,7 @@ const Payments = {
             created_at: nowUtcString(),
             updated_at: nowUtcString(),
         }, () => []);
+        return row.id; // PHP storage_insert() returns the new row's id
     },
 
     attemptUpdate(id, status, reference = null, amountSatang = null, responseCode = null) {
@@ -170,7 +171,8 @@ const Payments = {
 
         // Reuse an unexpired transaction
         if (order.provider_transaction_id && order.provider_expires_at) {
-            if (new Date(order.provider_expires_at.replace(' ', 'T')) > new Date()) {
+            const exp = parseUtc(order.provider_expires_at);
+            if (exp && exp > new Date()) {
                 return {
                     transactionId: order.provider_transaction_id,
                     qrUrl: order.provider_qr_url,
@@ -203,12 +205,14 @@ const Payments = {
         const id = Number(order.id);
 
         // Throttle to once per 10s
-        if (order.next_provider_check_at && new Date(order.next_provider_check_at.replace(' ', 'T')) > new Date()) {
+        const nextCheck = parseUtc(order.next_provider_check_at);
+        if (nextCheck && nextCheck > new Date()) {
             return { status: 'pending', paid: false, throttled: true };
         }
 
         // Provider expiry
-        if (order.provider_expires_at && new Date(order.provider_expires_at.replace(' ', 'T')) <= new Date()) {
+        const providerExp = parseUtc(order.provider_expires_at);
+        if (providerExp && providerExp <= new Date()) {
             Orders.markExpired(id);
             return { status: 'expired', paid: false };
         }
@@ -245,7 +249,8 @@ const Payments = {
         }
 
         if (check.status === 'pending') {
-            const next = nowUtcString();
+            // PHP: next check = now + 10s (real throttle, avoids hammering the API)
+            const next = futureUtcString(10000);
             Orders.setNextCheck(id, next);
             if (check.expiresAt) {
                 Orders.setProvider(id, order.provider_transaction_id, check.expiresAt, next);

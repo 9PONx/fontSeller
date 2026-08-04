@@ -42,7 +42,8 @@ const Downloads = {
         const order = Orders.byId(token.order_id);
         if (!order || order.status !== 'paid') return null;
 
-        if (new Date(token.expires_at.replace(' ', 'T')) <= new Date()) return null;
+        const exp = parseUtc(token.expires_at);
+        if (exp && exp <= new Date()) return null;
         if (token.download_count >= token.max_downloads) return null;
 
         return { token, order };

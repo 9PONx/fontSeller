@@ -72,7 +72,10 @@ const { chromium } = require('playwright');
   const dl = page.waitForEvent('download', { timeout: 30000 });
   await page.click('#downloadBtn');
   const download = await dl;
-  console.log('download:', download.suggestedFilename(), '(' + (await (await download.createReadStream()).read()).length + ' bytes first chunk)');
+  console.log('download:', download.suggestedFilename());
+  let size = 0;
+  for await (const c of await download.createReadStream()) size += c.length;
+  console.log('download size:', size, 'bytes');
 
   const pageErrors = errors.filter(e => !e.includes('net::ERR') && !e.includes('favicon'));
   console.log('JS errors:', pageErrors.length ? pageErrors : 'none');

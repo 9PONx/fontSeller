@@ -22,7 +22,8 @@ function setView(html) {
 
 function fmtDate(iso) {
     if (!iso) return '';
-    const d = new Date(iso.replace(' ', 'T'));
+    const d = parseUtc(iso);
+    if (!d) return '';
     return d.toLocaleString('th-TH', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
 }
 
@@ -480,7 +481,7 @@ function renderPayPromptpay(order) {
     (async function init() {
         try {
             const qr = await Payments.paymentStartPromptpay(publicId);
-            expiresTs = new Date(qr.expiresAt.replace(' ', 'T')).getTime();
+            expiresTs = parseUtc(qr.expiresAt).getTime();
             document.getElementById('ppAmount').textContent = moneyTHB(qr.amountSatang);
             document.getElementById('ppTxn').textContent = qr.transactionId;
             qrBox.innerHTML = `<img src="${escapeHtml(qr.qrUrl)}" alt="PromptPay QR Code" class="mx-auto" style="max-width:288px">`;

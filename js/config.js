@@ -42,6 +42,24 @@ function nowUtcString() {
     return new Date().toISOString().slice(0, 19).replace('T', ' ');
 }
 
+/**
+ * Parse "YYYY-MM-DD HH:MM:SS" (UTC wall clock, as stored by nowUtcString)
+ * as UTC — NOT local time. Fixes the 7h skew (GMT+7) that made payment
+ * polls think the QR already expired / always throttled.
+ */
+function parseUtc(str) {
+    if (!str) return null;
+    let s = String(str).trim();
+    if (!/[zZ]$|[+-]\d{2}:?\d{2}$/.test(s)) s = s.replace(' ', 'T') + 'Z';
+    else s = s.replace(' ', 'T');
+    const d = new Date(s);
+    return isNaN(d.getTime()) ? null : d;
+}
+
+function futureUtcString(msFromNow) {
+    return new Date(Date.now() + msFromNow).toISOString().slice(0, 19).replace('T', ' ');
+}
+
 function randomHex(bytes) {
     const arr = new Uint8Array(bytes);
     crypto.getRandomValues(arr);
