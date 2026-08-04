@@ -1,0 +1,46 @@
+{PromptPay Generate QR Code
+ QR Code  E ndpoint
+/v1/promptpay/generate
+Request Example:
+<?php $curl = curl_init();
+curl_setopt_array($curl, array( CURLOPT_URL => 'https://api.inwcloud.shop/v1/promptpay/generate', CURLOPT_RETURNTRANSFER => true, CURLOPT_CUSTOMREQUEST => 'POST', CURLOPT_POSTFIELDS => json_encode(array( "amount" => 10 )), CURLOPT_HTTPHEADER => array( 'Authorization: Bearer YOUR_API_KEY', 'Content-Type: application/json' ),
+));
+$response = curl_exec($curl); curl_close($curl); echo $response;
+R esponse Example(success): {
+status: 'success', data: {
+transactionId: 'Market-1-.....', qr_url: 'https://api.qrserver.com/v1/create-qr-code/?data=inwcloud&size=300x300&ecc=M&format=png& qzone=1&charset-source=UTF-8&charset-target=UTF-8', payload: '000201010.....', amount: '10.98', expires_at: 1764246956 }, rate_limit: { limit: 50, remaining: 49, tier: 'free' }, customer_type: 'existing' }
+R esponse Example(error):{ status: 'error', message: 'Invalid API key', code: 'INVALID_API_KEY'
+}
+
+Verify QR Code
+ transactionId
+Endpoint
+/v1/promptpay/check
+R equest Example: <?php $curl = curl_init();
+curl_setopt_array($curl, array( CURLOPT_URL => 'https://api.inwcloud.shop/v1/promptpay/check', CURLOPT_RETURNTRANSFER => true, CURLOPT_CUSTOMREQUEST => 'POST', CURLOPT_POSTFIELDS => json_encode(array( "transactionId" => 'Market-1........' )), CURLOPT_HTTPHEADER => array( 'Authorization: Bearer YOUR_API_KEY', 'Content-Type: application/json' ),
+));
+$response = curl_exec($curl); curl_close($curl); echo $response;
+Response Example(success): {
+status: 'success', message: '', transactionId: 'Market-1......', amount: '10.95', customer_type: 'existing', cost: 0 }
+R esponse Example(pending): {
+status: 'pending', message: '', transactionId: 'Market-1......', amount: '10.95', expires_at: 1764298489, time_remaining: 548 }
+Response Example(error): {
+status: 'error', message: 'Transaction ID is required', code: 'MISSING_TRANSACTION_ID' }
+P romptPay }
+
+{TrueWallet Redeem Voucher
+ TrueMoney Wallet
+E ndpoint
+/v1/truewallet/redeem
+R equest Example: <?php $curl = curl_init();
+curl_setopt_array($curl, array( CURLOPT_URL => 'https://api.inwcloud.shop/v1/truewallet/redeem', CURLOPT_RETURNTRANSFER => true, CURLOPT_CUSTOMREQUEST => 'POST', CURLOPT_POSTFIELDS => json_encode(array( "voucher_link" => "https://gift.truemoney.com/campaign/?v=xxxx" )), CURLOPT_HTTPHEADER => array( 'Authorization: Bearer YOUR_API_KEY', 'Content-Type: application/json' ),
+));
+$response = curl_exec($curl); curl_close($curl); echo $response;
+Response Example(success): {
+status: 'success', message: '', data: {
+amount: 10, voucher_link: 'https://gift.truemoney.com/campaign/?v=xxxx' }, rate_limit: { limit: 50, remaining: 49, tier: 'free' }, billing: { cost: 0, customer_type: 'existing' } }
+Response Example(error): {
+status: 'error', message: 'Voucher link is required', code: 'MISSING_VOUCHER_LINK' }
+T rueWallet }
+
+
