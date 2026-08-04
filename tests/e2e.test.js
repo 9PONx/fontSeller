@@ -84,6 +84,35 @@ const { chromium } = require('playwright');
   for await (const c of await download.createReadStream()) size += c.length;
   console.log('download size:', size, 'bytes');
 
+  // 5) Recover an order that an older cached build prematurely expired.
+  const recoveryTxn = 'Market-403-1785837007-513a73973c911f331548';
+  await page.route('https://api.inwcloud.shop/v1/promptpay/check', route => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({
+      status: 'success',
+      message: 'ชำระเงินสำเร็จ',
+      transactionId: recoveryTxn,
+      amount: '100.12',
+      customer_type: 'existing',
+      cost: 0,
+    }),
+  }));
+  const recoveryPublicId = await page.evaluate(txn => {
+    const order = Orders.create('Recovery Test', 'recovery@test.com', 'promptpay');
+    Orders.setProvider(order.id, txn, '2026-08-04 09:51:00', null, 'https://api.qrserver.com/v1/create-qr-code/?data=recovery&size=300x300');
+    Orders.markExpired(order.id);
+    Session.set({ order_public_id: order.public_id });
+    return order.public_id;
+  }, recoveryTxn);
+  await page.evaluate(id => Router.navigate('pay', { id }), recoveryPublicId);
+  await page.waitForSelector('#downloadBtn', { timeout: 5000 });
+  const recoveredOrder = await page.evaluate(id => Orders.byPublicId(id), recoveryPublicId);
+  if (recoveredOrder.status !== 'paid' || recoveredOrder.amount_satang !== 10012) {
+    throw new Error('expired PromptPay order was not recovered: ' + JSON.stringify(recoveredOrder));
+  }
+  console.log('expired PromptPay recovery OK:', recoveredOrder.status, recoveredOrder.amount_satang);
+
   const pageErrors = errors.filter(e => !e.includes('net::ERR') && !e.includes('favicon'));
   console.log('JS errors:', pageErrors.length ? pageErrors : 'none');
   await browser.close();

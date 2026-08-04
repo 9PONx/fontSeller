@@ -368,7 +368,9 @@ function renderPay(params) {
     if (!publicId || !order || session.order_public_id !== publicId) {
         return renderError(404, 'ไม่พบคำสั่งซื้อ');
     }
-    if (!['pending', 'paid'].includes(order.status)) {
+    const recoverableExpiredPromptpay = order.status === 'expired' &&
+        order.payment_method === 'promptpay' && order.provider_transaction_id;
+    if (!['pending', 'paid'].includes(order.status) && !recoverableExpiredPromptpay) {
         return renderError(404, 'คำสั่งซื้อไม่พร้อมใช้งาน');
     }
     if (order.status === 'paid') {
@@ -419,6 +421,8 @@ function renderPayPromptpay(order) {
     const qrBox = document.getElementById('qrBox');
     let expiresTs = null;
     let pollTimer = null;
+    let countdownTimer = null;
+    let paymentFinished = false;
 
     function setStatus(kind, text) {
         const map = {
@@ -437,8 +441,7 @@ function renderPayPromptpay(order) {
         const diff = Math.max(0, Math.floor((expiresTs - Date.now()) / 1000));
         if (diff <= 0) {
             countdownEl.textContent = 'หมดอายุ';
-            clearInterval(pollTimer);
-            setStatus('bad', 'การชำระเงินหมดอายุ กรุณาสั่งซื้อใหม่');
+            if (!paymentFinished) setStatus('bad', 'กำลังตรวจสอบสถานะการชำระเงินครั้งสุดท้าย...');
             return;
         }
         countdownEl.textContent = Math.floor(diff / 60) + ':' + String(diff % 60).padStart(2, '0');
@@ -448,14 +451,25 @@ function renderPayPromptpay(order) {
         try {
             const r = await Payments.paymentRefreshPromptpay(publicId);
             if (r.status === 'paid') {
+                paymentFinished = true;
                 setStatus('ok', 'ชำระเงินสำเร็จ! กำลังไปหน้าดาวน์โหลด...');
                 clearInterval(pollTimer);
+                clearInterval(countdownTimer);
                 setTimeout(() => Router.navigate('success', { id: publicId }), 1200);
             } else if (r.status === 'failed' || r.status === 'expired') {
+                paymentFinished = true;
                 setStatus('bad', r.status === 'expired' ? 'การชำระเงินหมดอายุ' : 'การชำระเงินไม่สำเร็จ');
                 clearInterval(pollTimer);
+                clearInterval(countdownTimer);
+            } else {
+                const refreshed = Orders.byPublicId(publicId);
+                const refreshedExp = refreshed && parseUtc(refreshed.provider_expires_at);
+                if (refreshedExp) expiresTs = refreshedExp.getTime();
             }
-        } catch (e) { /* keep polling */ }
+            return r;
+        } catch (e) {
+            return null; // A transient provider/CORS error is retried while pending.
+        }
     }
 
     async function enableDemo(reason) {
@@ -480,14 +494,44 @@ function renderPayPromptpay(order) {
 
     (async function init() {
         try {
+            // Reconcile an existing transaction before paymentStartPromptpay can
+            // replace an apparently expired QR with a new transaction.
+            if (order.provider_transaction_id) {
+                document.getElementById('ppTxn').textContent = order.provider_transaction_id;
+                document.getElementById('ppAmount').textContent = moneyTHB(order.amount_satang);
+                if (order.provider_qr_url) {
+                    qrBox.innerHTML = `<img src="${escapeHtml(order.provider_qr_url)}" alt="PromptPay QR Code" class="mx-auto" style="max-width:288px">`;
+                }
+                const existingExp = parseUtc(order.provider_expires_at);
+                if (existingExp) {
+                    expiresTs = existingExp.getTime();
+                    tick();
+                    countdownTimer = setInterval(tick, 1000);
+                }
+
+                await poll();
+                if (paymentFinished) return;
+                if (order.status === 'expired') {
+                    setStatus('bad', 'การชำระเงินหมดอายุ');
+                    clearInterval(countdownTimer);
+                    return;
+                }
+            }
+
+            const current = Orders.byPublicId(publicId);
+            if (!current || current.status !== 'pending') return;
+
             const qr = await Payments.paymentStartPromptpay(publicId);
-            expiresTs = parseUtc(qr.expiresAt).getTime();
+            const qrExp = parseUtc(qr.expiresAt);
+            expiresTs = qrExp ? qrExp.getTime() : null;
             document.getElementById('ppAmount').textContent = moneyTHB(qr.amountSatang);
             document.getElementById('ppTxn').textContent = qr.transactionId;
             qrBox.innerHTML = `<img src="${escapeHtml(qr.qrUrl)}" alt="PromptPay QR Code" class="mx-auto" style="max-width:288px">`;
             tick();
-            setInterval(tick, 1000);
-            pollTimer = setInterval(poll, 5000);
+            if (!countdownTimer) countdownTimer = setInterval(tick, 1000);
+
+            if (!order.provider_transaction_id) await poll();
+            if (!paymentFinished) pollTimer = setInterval(poll, 5000);
         } catch (err) {
             const msg = String(err && err.message || err);
             if (msg.startsWith('BROWSER_BLOCKED')) {

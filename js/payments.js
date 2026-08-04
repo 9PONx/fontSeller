@@ -198,57 +198,75 @@ const Payments = {
         const order = Orders.byPublicId(publicId);
         if (!order) throw new Error('Order not found');
 
-        if (order.status !== 'pending') {
+        if (!['pending', 'expired'].includes(order.status) || order.payment_method !== 'promptpay') {
             return { status: order.status, paid: order.status === 'paid' };
         }
 
         const id = Number(order.id);
+        const wasExpired = order.status === 'expired';
 
-        // Throttle to once per 10s
+        // Only active orders are throttled. Expired orders get one fresh
+        // reconciliation check so an older cached build cannot strand a payment.
         const nextCheck = parseUtc(order.next_provider_check_at);
-        if (nextCheck && nextCheck > new Date()) {
+        if (!wasExpired && nextCheck && nextCheck > new Date()) {
             return { status: 'pending', paid: false, throttled: true };
         }
 
-        // Provider expiry
         const providerExp = parseUtc(order.provider_expires_at);
-        if (providerExp && providerExp <= new Date()) {
-            Orders.markExpired(id);
-            return { status: 'expired', paid: false };
-        }
-
         if (!order.provider_transaction_id) {
+            if (wasExpired || (providerExp && providerExp <= new Date())) {
+                Orders.markExpired(id);
+                return { status: 'expired', paid: false };
+            }
             return { status: 'pending', paid: false };
         }
 
+        // Ask the provider before applying local expiry. A payment may settle at
+        // the boundary, and the provider result is authoritative for success.
         const check = await this.checkPromptpay(order.provider_transaction_id);
 
         if (!check) {
+            if (wasExpired || (providerExp && providerExp <= new Date())) {
+                Orders.markExpired(id);
+                return { status: 'expired', paid: false };
+            }
             Orders.setNextCheck(id, nowUtcString());
             return { status: 'pending', paid: false };
         }
 
         const minExpected = CONFIG.priceSatang;
         const maxExpected = minExpected + 5000;
+        const reject = () => {
+            if (wasExpired) return { status: 'expired', paid: false };
+            Orders.markFailed(id);
+            return { status: 'failed', paid: false };
+        };
 
         if (check.status === 'success') {
-            if (check.transactionId !== order.provider_transaction_id) {
-                Orders.markFailed(id);
-                return { status: 'failed', paid: false };
-            }
+            if (check.transactionId !== order.provider_transaction_id) return reject();
+
             const paidAmount = check.amountSatang;
-            if (paidAmount === null || paidAmount < minExpected || paidAmount > maxExpected) {
-                Orders.markFailed(id);
-                return { status: 'failed', paid: false };
-            }
+            if (paidAmount === null || paidAmount < minExpected || paidAmount > maxExpected) return reject();
+
             if (Number(order.amount_satang || 0) !== paidAmount) {
                 Orders.setAmount(id, paidAmount);
             }
-            const paid = Orders.markPaid(id, check.transactionId, paidAmount);
-            return { status: 'paid', paid };
+            const paid = Orders.markPaid(id, check.transactionId, paidAmount, ['pending', 'expired']);
+            return paid
+                ? { status: 'paid', paid: true }
+                : { status: Orders.byId(id).status, paid: false };
         }
 
         if (check.status === 'pending') {
+            if (wasExpired) return { status: 'expired', paid: false };
+
+            const checkedExp = parseUtc(check.expiresAt);
+            const effectiveExp = checkedExp || providerExp;
+            if (effectiveExp && effectiveExp <= new Date()) {
+                Orders.markExpired(id);
+                return { status: 'expired', paid: false };
+            }
+
             // PHP: next check = now + 10s (real throttle, avoids hammering the API)
             const next = futureUtcString(10000);
             Orders.setNextCheck(id, next);
@@ -258,8 +276,7 @@ const Payments = {
             return { status: 'pending', paid: false };
         }
 
-        Orders.markFailed(id);
-        return { status: 'failed', paid: false };
+        return reject();
     },
 
     async paymentRedeemTruewallet(publicId, voucherUrl) {

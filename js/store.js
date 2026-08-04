@@ -114,10 +114,10 @@ const Orders = {
         return Store.find(CONFIG.keyOrders, r => Number(r.id) === Number(id), () => []);
     },
 
-    markPaid(id, txnId, amountSatang) {
+    markPaid(id, txnId, amountSatang, allowedStatuses = ['pending']) {
         return Store.updateWhere(
             CONFIG.keyOrders,
-            r => Number(r.id) === Number(id) && r.status === 'pending' && Number(r.amount_satang) === Number(amountSatang),
+            r => Number(r.id) === Number(id) && allowedStatuses.includes(r.status) && Number(r.amount_satang) === Number(amountSatang),
             r => {
                 r.status = 'paid';
                 r.provider_transaction_id = txnId;

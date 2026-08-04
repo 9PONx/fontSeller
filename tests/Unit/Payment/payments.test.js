@@ -80,6 +80,7 @@ function seedOrder(method = 'promptpay', amount = 10000) {
 
 function setRoute(url, status, body) { __mock.routes.set(url, { status, body }); }
 const calls = (sub) => __mock.calls.filter(c => c.includes(sub)).length;
+const futureUtcStringForTest = (ms) => new Date(Date.now() + ms).toISOString().slice(0, 19).replace('T', ' ');
 
 /** Minimal amount for a fresh order after QR generate (100.00 + fee). */
 const GEN = 'https://api.inwcloud.shop/v1/promptpay/generate';
@@ -167,6 +168,56 @@ async function main() {
         assert.ok(after.paid_at);
     });
 
+    // --- recovery: cached old build marked the paid transaction expired ---
+    await T('expired order + provider success 100.12 -> กู้เป็น paid', async () => {
+        const txn = 'Market-403-1785837007-513a73973c911f331548';
+        const o = seedOrder();
+        run(`Orders.setProvider(${o.id}, ${JSON.stringify(txn)}, "2026-08-04 09:51:00", null, "https://api.qrserver.com/v1/x")`);
+        run(`Orders.markExpired(${o.id})`);
+        setRoute(CHECK, 200, {
+            status: 'success',
+            message: 'ชำระเงินสำเร็จ',
+            transactionId: txn,
+            amount: '100.12',
+            customer_type: 'existing',
+            cost: 0,
+        });
+
+        const r = await run(`Payments.paymentRefreshPromptpay(${JSON.stringify(o.public_id)})`);
+
+        assert.strictEqual(r.status, 'paid');
+        assert.strictEqual(r.paid, true);
+        const after = run(`Orders.byPublicId(${JSON.stringify(o.public_id)})`);
+        assert.strictEqual(after.status, 'paid');
+        assert.strictEqual(after.amount_satang, 10012);
+        assert.ok(after.paid_at);
+    });
+
+    await T('expired order + provider pending -> ยัง expired', async () => {
+        const o = seedOrder();
+        run(`Orders.setProvider(${o.id}, "Market-expired", "2020-01-01 00:00:00", null, "https://api.qrserver.com/v1/x")`);
+        run(`Orders.markExpired(${o.id})`);
+        setRoute(CHECK, 200, pendingCheck('Market-expired'));
+
+        const r = await run(`Payments.paymentRefreshPromptpay(${JSON.stringify(o.public_id)})`);
+
+        assert.strictEqual(r.status, 'expired');
+        assert.strictEqual(r.paid, false);
+        assert.strictEqual(run(`Orders.byPublicId(${JSON.stringify(o.public_id)}).status`), 'expired');
+    });
+
+    await T('pending order ที่ local expiry ผ่านแล้ว + provider success -> paid', async () => {
+        const o = seedOrder();
+        run(`Orders.setProvider(${o.id}, "Market-boundary", "2020-01-01 00:00:00", null, "https://api.qrserver.com/v1/x")`);
+        setRoute(CHECK, 200, okCheck('Market-boundary', '100.12'));
+
+        const r = await run(`Payments.paymentRefreshPromptpay(${JSON.stringify(o.public_id)})`);
+
+        assert.strictEqual(r.status, 'paid');
+        assert.strictEqual(r.paid, true);
+        assert.strictEqual(run(`Orders.byPublicId(${JSON.stringify(o.public_id)}).status`), 'paid');
+    });
+
     // --- check: success แต่จ่ายยอดต่ำกว่า 100.00 -> failed ไม่ up เงิน ---
     await T('check success แต่ยอด 99.99 (< 100) -> failed', async () => {
         setRoute(GEN, 200, okGenerate('Market-1', '100.03'));
@@ -209,6 +260,21 @@ async function main() {
         const r2 = await run(`Payments.paymentRefreshPromptpay(${JSON.stringify(o.public_id)})`);
         assert.strictEqual(r2.throttled, true, 'poll รอบถัดไปใน 10 วิต้องถูก throttle');
         assert.strictEqual(r2.status, 'pending');
+    });
+
+    await T('provider pending + expires_at ผ่านแล้ว -> expired', async () => {
+        const o = seedOrder();
+        run(`Orders.setProvider(${o.id}, "Market-expired-pending", ${JSON.stringify(futureUtcStringForTest(60000))}, null, "https://api.qrserver.com/v1/x")`);
+        setRoute(CHECK, 200, {
+            status: 'pending',
+            transactionId: 'Market-expired-pending',
+            expires_at: Math.floor(Date.now() / 1000) - 1,
+        });
+
+        const r = await run(`Payments.paymentRefreshPromptpay(${JSON.stringify(o.public_id)})`);
+
+        assert.strictEqual(r.status, 'expired');
+        assert.strictEqual(run(`Orders.byPublicId(${JSON.stringify(o.public_id)}).status`), 'expired');
     });
 
     // --- check: provider error (network) -> pending, ไม่พัง ---
