@@ -434,7 +434,7 @@ function renderPayPromptpay(order) {
 
     function tick() {
         if (!expiresTs) return;
-        const diff = Math.max(0, Math.floor(expiresTs - Date.now() / 1000));
+        const diff = Math.max(0, Math.floor((expiresTs - Date.now()) / 1000));
         if (diff <= 0) {
             countdownEl.textContent = 'หมดอายุ';
             clearInterval(pollTimer);

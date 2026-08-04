@@ -43,6 +43,13 @@ const { chromium } = require('playwright');
   console.log('pay view OK — URL:', page.url());
   await page.waitForTimeout(6000); // allow QR generation attempt
 
+  // countdown must be a sane mm:ss (regression: ms-vs-seconds unit bug)
+  const cd = await page.textContent('#countdown');
+  const m = (cd || '').match(/^(\d+):(\d{2})$/);
+  const cdOk = m && Number(m[1]) <= 60;
+  console.log('countdown:', cd, cdOk ? 'OK' : '❌ broken');
+  if (!cdOk) throw new Error('countdown broken: ' + cd);
+
   const qrState = await page.evaluate(() => {
     const qr = document.getElementById('qrBox').innerText;
     const demo = document.getElementById('ppDemoBox');
