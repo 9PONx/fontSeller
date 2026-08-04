@@ -1,0 +1,3680 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ชุดฟอนต์ไทยและอังกฤษ 100 บาท - FontSeller</title>
+    <meta name="description" content="FontSeller — ร้านขายชุดฟอนต์ 100 บาท (โปรเจกต์ PHP: Laragon + InwCloud)">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 200: '#bbf7d0', 500: '#22c55e', 600: '#16a34a', 700: '#15803d' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
+<!-- Static preview notice -->
+<div class="bg-amber-50 border-b border-amber-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 text-xs sm:text-sm text-amber-800 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center">
+        <span>⚡ หน้านี้คือหน้าแสดงตัวอย่างแบบ static (GitHub Pages — รัน PHP ไม่ได้)</span>
+        <a href="https://github.com/9PONx/fontSeller" target="_blank" rel="noopener"
+           class="font-semibold underline hover:text-amber-900">ดู source code</a>
+        <span>·</span>
+        <span>ร้านจริง (PHP) รันที่เครื่องคุณ: <a href="http://127.0.0.1/FontSeller/" class="font-mono font-semibold underline hover:text-amber-900">http://127.0.0.1/FontSeller/</a></span>
+    </div>
+</div>
+<header class="bg-white shadow-sm border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-2">
+            <span class="text-2xl font-bold text-brand-600">FontSeller</span>
+            <span class="text-sm text-gray-500 hidden sm:inline">ชุดฟอนต์ทั้งหมด</span>
+        </a>
+        <span class="text-sm font-semibold text-brand-700 bg-brand-50 px-3 py-1 rounded-full">100 บาท</span>
+    </div>
+</header>
+<main class="flex-1">
+    <!-- Hero -->
+<section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-brand-50 via-white to-white"></div>
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 text-center">
+        <span class="inline-flex items-center gap-2 bg-brand-600 text-white text-sm font-semibold px-4 py-1.5 rounded-full mb-6">
+            🎨 ชุดฟอนต์ไทยและอังกฤษ &middot; ราคาเดียว 100 บาท
+        </span>
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
+            ฟอนต์กว่า 3,406 ตัว
+            <span class="text-brand-600">ในชุดเดียว</span>
+        </h1>
+        <p class="text-lg sm:text-xl text-gray-600 mb-8">
+            ซื้อครั้งเดียว รับไฟล์ฟอนต์ TTF/OTF ครบชุดทันที ใช้ได้กับทุกโปรแกรม
+            ทั้ง Windows, macOS และ Linux — เหมาะกับงานดีไซน์ งานพิมพ์ และงานคอนเทนต์
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a href="https://github.com/9PONx/fontSeller"
+               target="_blank" rel="noopener"
+               class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-brand-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg shadow-brand-600/25 hover:bg-brand-700 hover:shadow-brand-700/25 transition-all">
+                ซื้อเลย - 100 บาท (ชำระจริงที่แอป PHP)
+            </a>
+            <a href="#font-list"
+               class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white text-gray-700 px-8 py-4 rounded-xl font-semibold border border-gray-300 hover:bg-gray-50 transition-colors">
+                ดูรายชื่อฟอนต์ทั้งหมด
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Stats -->
+<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 pb-4">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 text-center">
+            <p class="text-3xl font-extrabold text-brand-600">3,406</p>
+            <p class="text-sm text-gray-500 mt-1">ฟอนต์ในชุด (TTF/OTF)</p>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 text-center">
+            <p class="text-3xl font-extrabold text-brand-600">2,982</p>
+            <p class="text-sm text-gray-500 mt-1">ไฟล์ TTF</p>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 text-center">
+            <p class="text-3xl font-extrabold text-brand-600">424</p>
+            <p class="text-sm text-gray-500 mt-1">ไฟล์ OTF</p>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 text-center">
+            <p class="text-3xl font-extrabold text-brand-600">~454 MB</p>
+            <p class="text-sm text-gray-500 mt-1">ขนาดไฟล์ดาวน์โหลด</p>
+        </div>
+    </div>
+    <p class="text-center text-xs text-gray-500 mt-3">
+        ระบบสแกนพบไฟล์ฟอนต์ทั้งหมด 3,625 ไฟล์ — ในชุดขายรวมเฉพาะ TTF/OTF จำนวน 3,406 ไฟล์
+        (ไม่รวม TTC 21 / FON 198 ที่ไม่รองรับการใช้งานทั่วไป)
+    </p>
+</section>
+
+<!-- What's included -->
+<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-8">ในชุดนี้มีอะไรบ้าง?</h2>
+    <div class="grid sm:grid-cols-2 gap-4">
+        <div class="flex items-start gap-3 bg-white rounded-xl border border-gray-200 p-5">
+            <span class="text-2xl">📁</span>
+            <div>
+                <p class="font-semibold text-gray-900">ฟอนต์ครบทุกสไตล์</p>
+                <p class="text-sm text-gray-600 mt-1">Sans, Serif, Display, Handwriting, Monospace และอื่นๆ อีกมากมาย — ทั้งฟอนต์ไทยและอังกฤษในชุดเดียว</p>
+            </div>
+        </div>
+        <div class="flex items-start gap-3 bg-white rounded-xl border border-gray-200 p-5">
+            <span class="text-2xl">🖥️</span>
+            <div>
+                <p class="font-semibold text-gray-900">ใช้ได้กับทุกแพลตฟอร์ม</p>
+                <p class="text-sm text-gray-600 mt-1">ไฟล์ TTF/OTF มาตรฐาน ใช้ได้กับ Windows, macOS, Linux, Word, Photoshop, Illustrator, Canva และโปรแกรมอื่นๆ</p>
+            </div>
+        </div>
+        <div class="flex items-start gap-3 bg-white rounded-xl border border-gray-200 p-5">
+            <span class="text-2xl">⚡</span>
+            <div>
+                <p class="font-semibold text-gray-900">รับไฟล์ทันที</p>
+                <p class="text-sm text-gray-600 mt-1">ชำระเงินเสร็จระบบยืนยันยอดแล้ว รับลิงก์ดาวน์โหลด ZIP ทันที ไม่ต้องรอ</p>
+            </div>
+        </div>
+        <div class="flex items-start gap-3 bg-white rounded-xl border border-gray-200 p-5">
+            <span class="text-2xl">💵</span>
+            <div>
+                <p class="font-semibold text-gray-900">จ่ายครั้งเดียวจบ</p>
+                <p class="text-sm text-gray-600 mt-1">ราคา 100 บาท เท่านั้น ไม่มีค่าใช้จ่ายแอบแฝง ดาวน์โหลดซ้ำได้ 3 ครั้งภายใน 24 ชั่วโมง</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How it works -->
+<section class="bg-white border-y border-gray-200 py-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-8">วิธีสั่งซื้อง่ายๆ 3 ขั้นตอน</h2>
+        <div class="grid sm:grid-cols-3 gap-6">
+            <div class="text-center">
+                <div class="w-12 h-12 mx-auto rounded-full bg-brand-600 text-white font-bold text-lg flex items-center justify-center mb-3">1</div>
+                <p class="font-semibold text-gray-900 mb-1">กดปุ่มซื้อเลย</p>
+                <p class="text-sm text-gray-600">กรอกอีเมลสำหรับรับลิงก์ดาวน์โหลด</p>
+            </div>
+            <div class="text-center">
+                <div class="w-12 h-12 mx-auto rounded-full bg-brand-600 text-white font-bold text-lg flex items-center justify-center mb-3">2</div>
+                <p class="font-semibold text-gray-900 mb-1">ชำระเงิน 100 บาท</p>
+                <p class="text-sm text-gray-600">ผ่าน PromptPay QR หรือ TrueMoney Wallet</p>
+            </div>
+            <div class="text-center">
+                <div class="w-12 h-12 mx-auto rounded-full bg-brand-600 text-white font-bold text-lg flex items-center justify-center mb-3">3</div>
+                <p class="font-semibold text-gray-900 mb-1">ดาวน์โหลดทันที</p>
+                <p class="text-sm text-gray-600">ระบบยืนยันยอดแล้วปลดล็อก ZIP ให้ทันที</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Font name list (plain text) -->
+<section id="font-list" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="flex flex-wrap items-end justify-between gap-3 mb-3">
+        <div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">รายชื่อฟอนต์ทั้งหมด</h2>
+            <p id="fontCountHint" class="text-sm text-gray-600 mt-1">
+                รวม 3,406 ฟอนต์ (TTF 2,982 + OTF 424)
+            </p>
+        </div>
+        <button id="copyBtn" type="button" onclick="copyFontList()"
+                class="inline-flex items-center gap-1.5 bg-white border border-gray-300 text-sm font-medium text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors">
+            📋 คัดลอกชื่อทั้งหมด
+        </button>
+    </div>
+    <div class="mb-3">
+        <div class="relative">
+            <input id="fontSearch" type="search" maxlength="100" autocomplete="off"
+                   placeholder="🔍 ค้นหาชื่อฟอนต์ เช่น Sarabun, Angsana, ThaiSans ..."
+                   class="w-full bg-white border border-gray-300 rounded-lg pl-4 pr-12 py-2.5 text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors">
+            <button id="searchClear" type="button"
+                    class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 text-2xl leading-none"
+                    title="ล้างการค้นหา" aria-label="ล้างการค้นหา">&times;</button>
+        </div>
+        <p id="searchStatus" class="text-xs mt-1.5 hidden"></p>
+    </div>
+    <details open class="bg-white rounded-xl border border-gray-200 shadow-sm">
+        <summary class="cursor-pointer text-sm font-medium text-gray-700 px-5 py-4 select-none hover:bg-gray-50 rounded-t-xl">
+            แสดง / ซ่อนรายชื่อ (<span id="fontSummaryCount">3,406</span> ชื่อ)
+        </summary>
+        <pre id="fontNames" class="max-h-[28rem] overflow-auto px-5 py-4 text-sm leading-6 text-gray-700 whitespace-pre font-mono">-db7n
+-db7nb
+-dbec
+-dberawa
+-dbfb
+-dbfbi
+-dbfi
+-dbfm
+-dbfongn
+-dbpatpo
+-dbpb
+-dbpe
+-dbpm
+-dbpriva
+-JS7P
+-JSAI
+-JSANGSU
+-JSANI~1
+-JSARISA
+-JSBOABO
+-JSCB
+-JSCBS~1
+-JSCHAIM
+-JSCHALI
+-JSCHANO
+-JSCHARN
+-JSCHAWL
+-JSCHULE
+-JSCHUSR
+-JSCI
+-JSDUANG
+-JSEKACH
+-JSGB
+-JSHARIP
+-JSJB
+-JSJBI
+-JSJI
+-JSJINDA
+-JSJIS~1
+-JSJIS~2
+-JSJIS~3
+-JSJUKAP
+-JSJUNKA
+-JSKA
+-JSKARAB
+-JSKHUNW
+-JSKORAK
+-JSLB
+-JSLIKHI
+-JSMACHA
+-JSMB
+-JSMBI
+-JSMI
+-JSMOOKR
+-JSNA
+-JSNEENO
+-JSNI
+-JSNOKLA
+-JSNUSSA
+-JSOBSAW
+-JSOI
+-JSOOBBO
+-JSPA
+-JSPADAC
+-JSPI
+-JSPISIT
+-JSPIS~1
+-JSPIS~2
+-JSPIS~4
+-JSPITSA
+-JSPRAPA
+-JSPRASO
+-JSPUCHO
+-JSPUDGR
+-JSPUMPU
+-JSPURIP
+-JSRAPEE
+-JSRB
+-JSRBI
+-JSRI
+-JSSA
+-JSSAI
+-JSSAKSI
+-JSSAMUR
+-JSSANGR
+-JSSAOWA
+-JSSARUN
+-JSSAS~1
+-JSSAS~2
+-JSSB
+-JSSBI
+-JSSBI~1
+-JSSBS~1
+-JSSETHA
+-JSSI
+-JSSIRIU
+-JSSIS~1
+-JSSIS~2
+-JSSIS~3
+-JSSM
+-JSSMI
+-JSSMS~1
+-JSSMS~2
+-JSSUNSA
+-JSSYNJA
+-JSTHANA
+-JSTINA-
+-JSTOOMT
+-JSWI
+-JSWIS~1
+-JSWIS~2
+-JSYI
+-JSYODTH
+2547_Ddinya12N
+2547_Ddinya13N
+2547_DexboefriendN
+2547_Dinya01N
+2547_Dinya02N
+2547_Dinya03N
+2547_Dontworry_KookkaiN
+2547_Dontworry_office
+2547_DsunN
+2547_DthinN
+2548_D1N
+2548_D3N
+2548_D4N
+2548_D5N
+2548_iDinya-4
+2550-DDINYAMALAAW
+4711_AtNoon_BigHeadPS
+4711_AtNoon_Hippy
+4711_AtNoon_Olive
+4711_AtNoon_Regular
+4711_AtNoon_RegularPS
+4711_AtNoon_Student
+4711_AtNoon_Traditional
+4711_AtNoon_TraditionalPS
+4803_Kwang_MD
+4804_KwangMD_Pukluk
+4804_Kwang_MD_noHead
+4805KwangMD_Influenza
+4805_KwangMD_Melt
+4815_KwangMD_Catthai
+5011_thE_Little_Uki_noworry
+5012_tLU_huatoo0
+5012_tLU_huatoo0_BOLD
+5012_tLU_infection
+5102_UEtuek_anamai
+5103_tLU_JIUMJIUM
+5104_UTUEK_WORAWIT
+14274_Bluemoon_PixCers_v.1.1
+ABCPathomNarrow
+ABCPathomNarrowBold
+ABCPathomNarrowBoldItalic
+ABCPathomNarrowItalic
+ACaslonPro-Bold
+ACaslonPro-BoldItalic
+ACaslonPro-Italic
+ACaslonPro-Regular
+ACaslonPro-Semibold
+ACaslonPro-SemiboldItalic
+AC Espressa
+Adeline
+Adeline
+AdobeArabic-Bold
+AdobeArabic-BoldItalic
+AdobeArabic-Italic
+AdobeArabic-Regular
+AdobeDevanagari-Bold
+AdobeDevanagari-BoldItalic
+AdobeDevanagari-Italic
+AdobeDevanagari-Regular
+AdobeFangsongStd-Regular
+AdobeFanHeitiStd-Bold
+AdobeGothicStd-Bold
+AdobeHebrew-Bold
+AdobeHebrew-BoldItalic
+AdobeHebrew-Italic
+AdobeHebrew-Regular
+AdobeHeitiStd-Regular
+AdobeKaitiStd-Regular
+AdobeMingStd-Light
+AdobeMyungjoStd-Medium
+AdobeNaskh-Medium
+AdobeSongStd-Light
+AGaramondPro-Bold
+AGaramondPro-BoldItalic
+AGaramondPro-Italic
+AGaramondPro-Regular
+AGENCYB
+AGENCYR
+ahronbd
+Aidu
+Aidu Italic
+Aidu Two
+Aidu Two Italic
+Ajieb
+aldhabi
+Alef-Bold
+Alef-Regular
+ALGER
+Allona Smile
+Amiri-Bold
+Amiri-BoldItalic
+Amiri-Italic
+Amiri-Regular
+AmiriQuran
+Anastasiya
+Anchan
+Andalusia
+andlso
+angsd
+angsdb
+angsdbi
+angsdi
+Anthu
+ANTQUAB
+ANTQUABI
+ANTQUAI
+Anuphan-Bold
+Anuphan-ExtraLight
+Anuphan-Light
+Anuphan-Medium
+Anuphan-SemiBold
+Anuphan-Thin
+Anuphan-VariableFont_wght
+aparaj
+aparajb
+aparajbi
+aparaji
+Arabica
+Arabica-italic
+Arabica-Italic
+arial
+arialbd
+arialbi
+ariali
+ARIALN
+ARIALNB
+ARIALNBI
+ARIALNI
+ArialNova
+ArialNova-Bold
+ArialNova-BoldItalic
+ArialNova-Italic
+ArialNova-Light
+ArialNova-LightItalic
+ArialNovaCond
+ArialNovaCond-Bold
+ArialNovaCond-BoldItalic
+ArialNovaCond-Italic
+ArialNovaCond-Light
+ArialNovaCond-LightItalic
+ariblk
+Arietta
+ARLRDBD
+ASG Aksornsanan
+Astral 101
+Athiti-Bold
+Athiti-ExtraLight
+Athiti-Light
+Athiti-Medium
+Athiti-Regular
+Athiti-SemiBold
+avqest
+B2 SIGN Big Match
+B2 SIGN Big Match 1
+B2 SIGN Pachautid N
+B2 SIGN Pachautid S
+bahnschrift
+BaiJamjuree-Bold
+BaiJamjuree-BoldItalic
+BaiJamjuree-ExtraLight
+BaiJamjuree-ExtraLightItalic
+BaiJamjuree-Italic
+BaiJamjuree-Light
+BaiJamjuree-LightItalic
+BaiJamjuree-Medium
+BaiJamjuree-MediumItalic
+BaiJamjuree-Regular
+BaiJamjuree-SemiBold
+BaiJamjuree-SemiBoldItalic
+Bananasp
+bangna-new
+Bangnampueng
+baozi
+BASKVILL
+batmfa
+batmfo
+BAUHS93
+BELL
+Bellastory
+Bellastory Swash
+BELLB
+BELLI
+Berhilda
+Berhilda
+BERNHC
+Besok Lusa
+BirchStd
+Bisix
+Bisix Italic
+Bisix Light
+Bisix Light
+Bisix Light Italic
+BJB_BankJoongBaey
+BKANT
+Black Caviar ALT
+Black Caviar CAPS
+Black Caviar Regular
+BlackoakStd
+BLADRMF
+Bliss Bucket
+Bliss Bucket Italic
+Bliss Bucket Rounded
+Block-Regular
+BOD
+BOD_0
+BOD_BI
+BOD_BLAI
+BOD_BLAR
+BOD_CBI
+BOD_CI
+BOD_CR
+BOD_I
+BOD_PSTC
+BOD_R
+BOOKOS
+BOOKOSB
+BOOKOSBI
+BOOKOSI
+Boon-Bold
+Boon-Bold-Italic
+Boon-Book
+Boon-Book-Italic
+BoonTook-Mon-Ultra
+BoonTook-Ultra
+BRADHITC
+Breathe Fire II
+Brieghent
+Brigita
+BRITANIC
+BRLNSB
+BRLNSDB
+BRLNSR
+BROADW
+Brown Fish
+BRUSHSCI
+BrushScriptStd
+BSRUBANSOMDEJ-Black
+BSRUBANSOMDEJ-Bold
+BSRUBANSOMDEJ-BoldOblique
+BSRUBANSOMDEJ-Oblique
+BSRUBANSOMDEJ-Regular
+BSRUBANSOMDEJ-SemiBold
+BSSYM7
+BTTF
+Bubblegum
+Burrahar
+Butler_Black
+Butler_Black_Stencil
+Butler_Bold
+Butler_Bold_Stencil
+Butler_ExtraBold
+Butler_ExtraBold_Stencil
+Butler_Light
+Butler_Light_Stencil
+Butler_Medium
+Butler_Medium_Stencil
+Butler_Regular
+Butler_Regular_Stencil
+Butler_Ultra_Light
+Butler_Ultra_Light_Stencil
+Cabin-Bold
+Cabin-BoldItalic
+Cabin-Italic
+Cabin-Medium
+Cabin-MediumItalic
+Cabin-Regular
+Cabin-SemiBold
+Cabin-SemiBoldItalic
+Cabin_Condensed-Bold
+Cabin_Condensed-BoldItalic
+Cabin_Condensed-Italic
+Cabin_Condensed-Medium
+Cabin_Condensed-MediumItalic
+Cabin_Condensed-Regular
+Cabin_Condensed-SemiBold
+Cabin_Condensed-SemiBoldItalic
+Cabin_SemiCondensed-Bold
+Cabin_SemiCondensed-BoldItalic
+Cabin_SemiCondensed-Italic
+Cabin_SemiCondensed-Medium
+Cabin_SemiCondensed-MediumItalic
+Cabin_SemiCondensed-Regular
+Cabin_SemiCondensed-SemiBold
+Cabin_SemiCondensed-SemiBoldItalic
+Caladea-Bold
+Caladea-BoldItalic
+Caladea-Italic
+Caladea-Regular
+calibri
+calibrib
+calibrii
+calibril
+calibrili
+calibriz
+CALIFB
+CALIFI
+CALIFR
+CALIST
+CALISTB
+CALISTBI
+CALISTI
+cambriab
+cambriai
+cambriaz
+Canadia
+Candara
+Candarab
+Candarai
+Candaral
+Candarali
+Candaraz
+can_Jaew
+can_NongAor
+can_Rukdeaw01
+Caps
+Caribbean
+Carlito-Bold
+Carlito-BoldItalic
+Carlito-Italic
+Carlito-Regular
+carnevaleefreakshow
+CascadiaCode
+CascadiaMono
+CASTELAR
+CENSCBK
+CENTAUR
+CENTURY
+Cerulean Blue Caps Italic
+Cerulean Blue Caps Regular
+Cerulean Blue Italic
+Cerulean Blue Regular
+ChakraPetch-Bold
+ChakraPetch-BoldItalic
+ChakraPetch-Italic
+ChakraPetch-Light
+ChakraPetch-LightItalic
+ChakraPetch-Medium
+ChakraPetch-MediumItalic
+ChakraPetch-Regular
+ChakraPetch-SemiBold
+ChakraPetch-SemiBoldItalic
+ChaparralPro-Bold
+ChaparralPro-BoldIt
+ChaparralPro-Italic
+ChaparralPro-LightIt
+ChaparralPro-Regular
+charcoal1
+CharlemagneStd-Bold
+Charlotte Regular
+Charm-Bold
+Charm-Regular
+Charmonman-Bold
+Charmonman-Regular
+CHILLER
+Chonburi-Regular
+chonticha
+Christmas 1
+Christmas Dingbats
+Christmas Sparkle
+Ciellda
+Cipote
+Circe Slab A
+Circe Slab A Extra Light
+Circe Slab A Hairline
+Circe Slab A Light
+Circe Slab A Medium
+Circe Slab A Narrow
+Circe Slab A Narrow Light
+Circe Slab A Narrow Medium
+Circe Slab A Thin
+Circe Slab A Ultra Light
+Circe Slab B
+Circe Slab B Bold
+Circe Slab B Light
+Circe Slab B Medium
+Circe Slab B Narrow
+Circe Slab B Narrow Light
+Circe Slab B Narrow Medium
+Circe Slab C
+Circe Slab C Black
+Circe Slab C Bold
+Circe Slab C Extra Light
+Circe Slab C Light
+Circe Slab C Medium
+Circe Slab C Narrow
+Circe Slab C Narrow Light
+Circe Slab C Narrow Medium
+Circe Slab C Thin
+Circe Slab C Ultra Light
+Circular
+CircularBold
+Ckhans Fonts - Buckin Bold Demo
+Ckhans Fonts - Buckin Regular Demo
+Clorofil
+Clorofil Leaf
+Cloud-Bold
+Cloud-Light
+COLONNA
+comic
+comicbd
+comici
+comicz
+consola
+consolab
+consolai
+consolaz
+constan
+constanb
+constani
+constanz
+COOPBL
+CooperBlackStd
+CooperBlackStd-Italic
+COPRGTB
+COPRGTL
+corbel
+corbelb
+corbeli
+corbell
+corbelli
+corbelz
+cour
+courbd
+courbi
+couri
+Cross Over
+Cross Over Swashes
+CS-Cheangkhan
+CSChatThai
+CSChatThaiUI
+CSPraJad
+CSPraJad-bold
+CSPraJad-boldItalic
+CSPraJad-Italic
+CSPraKas
+CSPraKasBold
+CSPraKasFD
+CSPraKasFDBold
+CTS-Rattikal
+CURLZ_
+daunpenh
+david
+davidbd
+DavidCLM-Bold
+DavidCLM-Medium
+DavidLibre-Bold
+DavidLibre-Regular
+db-helvethaica-x-bd-ext-it-v32
+DB Adman X
+DB Adman X Bd
+DB Adman X BdIt
+DB Adman X Italic
+DB Adman X Li
+DB Adman X LiIt
+DB Adman X UltraLi
+DB Adman X UltraLiIt
+DB BrandVoice X
+DB BrandVoice X Bd
+DB BrandVoice X BdIt
+DB BrandVoice X Italic
+DB BrandVoice X Li
+DB BrandVoice X LiIt
+DB BrandVoice X UltraLi
+DB BrandVoice X UltraLiIt
+DB ComYard X
+DB ComYard X Bd
+DB ComYard X BdIt
+DB ComYard X Italic
+DB Diet X
+DB Diet X Italic
+DB Erawan X
+DB Erawan X Italic
+DB Ettaro X
+DB FongNam X
+DB FongNam X Bd
+DB FongNam X BdIt
+DB FongNam X Italic
+DB Green X
+DB GunEng 1 X
+DB GunEng 2 X
+DB Heavent Bd Cond It v3.2.1
+DB Heavent Bd Cond v3.2.1
+DB Heavent Bd v3.2.1
+DB Heavent Blk v3.2.1
+DB Heavent Cond It v3.2.1
+DB Heavent Cond v3.2.1
+DB Heavent It v3.2.1
+DB Heavent Li v3.2.1
+DB Heavent Med v3.2.1
+DB Heavent Thin v3.2.1
+DB Heavent v3.2.1
+DB HelvethaicaMon X
+DB HelvethaicaMon X Bd v3.2
+DB HelvethaicaMon X Blk
+DB HelvethaicaMon X Cond
+DB HelvethaicaMon X Med
+DB HelvethaicaMon X Med Cond
+DB HelvethaicaMon X v3.2
+DB Helvethaica X
+DB Helvethaica X Bd Cond It v3.2
+DB Helvethaica X Bd Cond v3.2
+DB Helvethaica X Bd Ext v3.2
+DB Helvethaica X Bd It v3.2
+DB Helvethaica X Bd v3.2
+DB Helvethaica X Blk
+DB Helvethaica X Blk Cond
+DB Helvethaica X Blk Cond It v3.2
+DB Helvethaica X Blk Cond v3.2
+DB Helvethaica X Blk Ext
+DB Helvethaica X Blk Ext It v3.2
+DB Helvethaica X Blk Ext v3.2
+DB Helvethaica X Blk It v3.2
+DB Helvethaica X Blk v3.2
+DB Helvethaica X Cond
+DB Helvethaica X Cond It v3.2
+DB Helvethaica X Cond v3.2
+DB Helvethaica X Ext
+DB Helvethaica X Ext It v3.2
+DB Helvethaica X Ext v3.2
+DB Helvethaica X It
+DB Helvethaica X It v3.2
+DB Helvethaica X Li
+DB Helvethaica X Li Cond
+DB Helvethaica X Li Cond It v3.2
+DB Helvethaica X Li Cond v3.2
+DB Helvethaica X Li Ext
+DB Helvethaica X Li Ext It v3.2
+DB Helvethaica X Li Ext v3.2
+DB Helvethaica X Li It v3.2
+DB Helvethaica X Li v3.2
+DB Helvethaica X Med
+DB Helvethaica X Med Cond
+DB Helvethaica X Med Cond It v3.2
+DB Helvethaica X Med Cond v3.2
+DB Helvethaica X Med Ext
+DB Helvethaica X Med Ext It v3.2
+DB Helvethaica X Med Ext v3.2
+DB Helvethaica X Med It v3.2
+DB Helvethaica X Med v3.2
+DB Helvethaica X Thin
+DB Helvethaica X Thin Cond
+DB Helvethaica X Thin Cond It v3.2
+DB Helvethaica X Thin Cond v3.2
+DB Helvethaica X Thin Ext
+DB Helvethaica X Thin Ext It v3.2
+DB Helvethaica X Thin Ext v3.2
+DB Helvethaica X Thin It v3.2
+DB Helvethaica X Thin v3.2
+DB Helvethaica X UlLi
+DB Helvethaica X UlLi Cond
+DB Helvethaica X UlLi Cond It v3.2
+DB Helvethaica X UlLi Cond v3.2
+DB Helvethaica X UlLi Ext
+DB Helvethaica X UlLi Ext It v3.2
+DB Helvethaica X UlLi Ext v3.2
+DB Helvethaica X UlLi It v3.2
+DB Helvethaica X UlLi v3.2
+DB Helvethaica X v3.2
+DB HuadChai X
+DB InWriting X
+DB InWriting X Bd
+DB JariyaTham X
+DB JariyaTham X Bd
+DB JariyaTham X BdIt
+DB JariyaTham X Italic
+DB JariyaTham X Li
+DB JariyaTham X LiIt
+DB KhaoSan X
+DB KhaoSan X Bd
+DB KhaoSan X BdIt
+DB KhaoSan X Italic
+DB King84
+DB Lim X
+DB Lim X Bd
+DB Lim X BdIt
+DB Lim X Italic
+DB Lim X Med
+DB Lim X MedIt
+DB Matrix X
+DB Matrix X Bd
+DB NamSmai X
+DB NamSmai X Italic
+DB Narai X
+DB Narai X Bd
+DB Narai X BdIt
+DB Narai X Italic
+DB ObjectStrk X
+DB ObjectStrk X Bd
+DB ObjectStrk X BdIt
+DB ObjectStrk X It
+DB ObjectStrk X Li
+DB ObjectStrk X LiIt
+DB Object X
+DB Object X Bd
+DB Object X BdIt
+DB Object X Italic
+DB Object X Li
+DB Object X LiIt
+DB Ozone X
+DB Ozone X Bd
+DB Ozone X BdIt
+DB Ozone X Italic
+DB Ozone X Li
+DB Ozone X LiIt
+DB Ozone X Med
+DB Ozone X MedIt
+DB Ozone X UltraLi
+DB Ozone X UltraLiIt
+DB Panda X
+DB PatPong X
+DB PatPong X Exten
+DB PatPong X ExtenIt
+DB PatPong X Italic
+DB Pomma X
+DB PorPiang X
+DB PorPiang X Bd
+DB PorPiang X Li
+DB Pradit X
+DB Pradit X Bd
+DB Pradit X BdIt
+DB Pradit X Italic
+DBPramotDemi Bold
+DB Private X
+DB Private X Italic
+DB Quanthong X
+DB Quanthong X Bd
+DB Quanthong X BdIt
+DB Quanthong X Italic
+DB Quanthong X Li
+DB Quanthong X LiIt
+DB RajDumnern X
+DB RajDumnern X Bd
+DB RajDumnern X BdIt
+DB RajDumnern X Italic
+DB Ramintra X
+DB Ramintra X Bd
+DB Ramintra X BdIt
+DB Ramintra X Italic
+DB Ramintra X Li
+DB Ramintra X LiIt
+DB Ramintra X UltraLi
+DB Ramintra X UltraLiIt
+DB SaiKrok X
+DB SaiKrok X Bd
+DB SaiKrok X BdIt
+DB SaiKrok X Italic
+DB SaiKrok X Li
+DB SaiKrok X LiIt
+DB Sathorn X
+DB Sathorn X Bd
+DB Sathorn X BdIt
+DB Sathorn X Italic
+DB Sathorn X Med
+DB Sathorn X MedIt
+DB Sharp X
+DB Sharp X Bd
+DB Sharp X BdIt
+DB Sharp X Italic
+DB SiamSqText X
+DB SiamSqText X Bd
+DB SiamSqText X BdIt
+DB SiamSqText X Italic
+DB SiamSquare X
+DB SiamSquare X ExtBd
+DB SiamSquare X Italic
+DB Silom X
+DB Silom X Bd
+DB Silom X BdIt
+DB Silom X Italic
+DB Soda X
+DB Soda X Bd
+DB Soda X BdIt
+DB Soda X Bk
+DB Soda X BkIt
+DB Soda X DemiBd
+DB Soda X DemiBdIt
+DB Soda X Italic
+DB Soda X Li
+DB Soda X LiIt
+DB Soda X Med
+DB Soda X MedIt
+DB Soda X UltraLi
+DB Soda X UltraLiIt
+DB Steel X
+DB Steel X Bd
+DB Steel X BdIt
+DB Steel X Italic
+DB Stick X
+DB Stick X Bd
+DB Stick X BdIt
+DB Stick X Italic
+DB Stick X Med
+DB Stick X MedIt
+DB Surawong X
+DB Surawong X Bd
+DB Surawong X BdIt
+DB Surawong X Italic
+DB Surawong X Li
+DB Surawong X LiIt
+DB TaGua X
+DB TaGua X Bd
+DB TaGua X BdIt
+DB TaGua X Italic
+DB Template X
+DB Template X Italic
+DB ThaiText X
+DB ThaiText X Bd
+DB ThaiText X BdIt
+DB ThaiText X Italic
+DB ThaiText X Li
+DB ThaiText X LiIt
+DB ThongLor X
+DB ThongLor X Bd
+DB ThongLor X BdIt
+DB ThongLor X DemBd
+DB ThongLor X DemBdIt
+DB ThongLor X Italic
+DB ThongLor X Med
+DB ThongLor X MedIt
+DB ToonHua X
+DB ToonHua X Bd
+DB ToonHua X BdIt
+DB ToonHua X Italic
+DB ToonHua X Li
+DB ToonHua X LiIt
+DB ToonHua X Med
+DB ToonHua X MedIt
+DB Urbanist X
+DB Urbanist X Bd
+DB Urbanist X Li
+DB Wittayu X
+DB Wittayu X Bd
+DB Wittayu X BdIt
+DB Wittayu X Italic
+DB Wittayu X Med
+DB Wittayu X MedIt
+DB Xtype X
+DB YangDung X
+DB YangDung X Italic
+debussy
+DejaVuMathTeXGyre
+DejaVuSans
+DejaVuSans-Bold
+DejaVuSans-BoldOblique
+DejaVuSans-ExtraLight
+DejaVuSans-Oblique
+DejaVuSansCondensed
+DejaVuSansCondensed-Bold
+DejaVuSansCondensed-BoldOblique
+DejaVuSansCondensed-Oblique
+DejaVuSansMono
+DejaVuSansMono-Bold
+DejaVuSansMono-BoldOblique
+DejaVuSansMono-Oblique
+Deng
+Dengb
+Dengl
+DensiaSans
+Dez Now Sans Black
+Dez Now Sans Black Italic
+Dez Now Sans Bold
+Dez Now Sans Bold Italic
+Dez Now Sans Extra Bold
+Dez Now Sans Extra Bold Italic
+Dez Now Sans Extra Light
+Dez Now Sans Extra Light Italic
+Dez Now Sans Gaunt
+Dez Now Sans Gaunt Italic
+Dez Now Sans Heavy
+Dez Now Sans Heavy Italic
+Dez Now Sans Italic
+Dez Now Sans Light
+Dez Now Sans Light Italic
+Dez Now Sans Medium
+Dez Now Sans Medium Italic
+Dez Now Sans Regular
+Dez Now Sans Semi Bold
+Dez Now Sans Semi Bold Italic
+Dez Now Sans Thin
+Dez Now Sans Thin Italic
+Dez Now Sans Ultra Thin
+Dez Now Sans Ultra Thin Italic
+DimsumDemo-Thin
+diploma
+dokchamp
+Domineers
+DONGTAO-DEMO
+DONGTAO-DEMO
+Douglass
+Draper
+drboran
+DRdeco
+DRjoyful
+Drop Stay
+Drop Stay
+DSEADR
+DSEAK
+DSEAL
+DSEANR
+DSEANT
+DSEAP
+DSEAPS
+DSECOL
+DSECOLE
+DSEDRA
+DSEDS
+DSEDY
+DSEERW
+DSEERWH
+DSEFH
+DSEFJ
+DSEIRP
+DSEJP
+DSEKAT
+DSEKKS
+DSEKM
+DSELP
+DSELT
+DSEMOD
+DSEMT
+DSEMTC
+DSEMTN
+DSENEW
+DSENK
+DSEORC
+DSEPC
+DSEPDP
+DSEPISIT
+DSEPNT
+DSEPOP
+DSEPP
+DSEPPE
+DSEPTM
+DSEPTME
+DSEPUN
+DSEPUNH
+DSEPUNS
+DSERBRN
+DSERIB
+DSESIN
+DSESKW
+DSESM
+DSESR
+DSESRD
+DSESRH
+DSESS
+DSESSW
+DSETC
+DSETR
+DSEVAMH
+DSEVAMPI
+DSEWSK
+DSEWTN
+DSEYWR
+DSN AdiRek
+DSN AmPun
+DSN AmPun Solid
+DSN AnoThai
+DSN AnuRak
+DSN ArKorn
+DSN Arluk
+DSN Cologne
+DSN Cologne Extend
+DSN DeCho
+DSN DokYa
+DSN Draft
+DSN DuSit
+DSN Erawan
+DSN Erawan Hollow
+DSN FreeHand
+DSN FreeJack
+DSN IsaRaPhap
+DSN JumPar
+DSN KaMon
+DSN Katreeya
+DSN KrungKaSame
+DSN LaiThai
+DSN LardPhrao
+DSN MaiThai
+DSN MaTiChon
+DSN Modern
+DSN MonTaNa
+DSN NamKang
+DSN Newspaper
+DSN Orchid
+DSN PaNuTat
+DSN PaTiMoke
+DSN PaTiMoke Extend
+DSN PatPong
+DSN PatPong Extend
+DSN PiSit
+DSN Poppy
+DSN PraDiPat
+DSN PreeCha
+DSN Punch
+DSN Punch Hollow
+DSN Punch Stripes
+DSN RatBuRaNa
+DSN Ribbon
+DSN SaiMai
+DSN SiamSquare
+DSN Single
+DSN SiRin
+DSN SiRin Hollow
+DSN SukSaWat
+DSN SuKumWit
+DSN SuRaDej
+DSN ThaiRat
+DSN ThongChai
+DSN Vampire
+DSN Vampire Hollow
+DSN WatTaNa
+DSN WiSaKa
+DSN YaoWaRat
+DUBAI-BOLD
+DUBAI-LIGHT
+DUBAI-MEDIUM
+DUBAI-REGULAR
+dY-Jidrid
+EACTExtra
+EACTExtraBold
+EACTExtraBoldItalic
+EACTExtraItalic
+ebrima
+ebrimabd
+EDBazaar
+EDMuzazhi
+Edore
+EDPenSook
+EDPenSook-Bold
+EDPhaitrong
+EDPhaitrong Italic
+EDSense
+EDSense Bold
+EkkamaiNew-Bold
+EkkamaiNew-Regular
+EkkamaiNew-Thin
+EkkamaiStandard-Light
+Elabama
+Elabama
+ELEPHNT
+ELEPHNTI
+ENGR
+Epoque 45 Light
+Epoque 55 Roman
+Epoque 75 Black
+eq feel good
+ERASBD
+ERASDEMI
+ERASLGHT
+ERASMD
+estre
+eucrd
+eucrdb
+eucrdbi
+eucrdi
+euphemia
+f0ntuni-apluemz
+f0ntuni-peehmee
+f0ntuni-peehmee
+Fahkwang-Bold
+Fahkwang-BoldItalic
+Fahkwang-ExtraLight
+Fahkwang-ExtraLightItalic
+Fahkwang-Italic
+Fahkwang-Light
+Fahkwang-LightItalic
+Fahkwang-Medium
+Fahkwang-MediumItalic
+Fahkwang-Regular
+Fahkwang-SemiBold
+Fahkwang-SemiBoldItalic
+FC Active Italic
+FC Active Light
+FC Active Light Italic
+FC Active Regular
+FC Daisy Bold Italic ver 1.00
+FC Daisy Bold ver 1.00
+FC Daisy Italic ver 1.00
+FC Daisy Regular ver 1.00
+FC Ekaluck Bold Italic ver 1.01
+FC Ekaluck Bold ver 1.01
+FC Ekaluck Italic ver 1.01
+FC Ekaluck Light Italic ver 1.01
+FC Ekaluck Light ver 1.01
+FC Ekaluck Regular ver 1.01
+FC Friday Medium
+FC Friday Medium Italic
+FC Galaxy Italic
+FC Galaxy Regular
+FC Home Black Italic ver 1.01
+FC Home Black ver 1.01
+FC Home Italic ver 1.01
+FC Home Regular ver 1.01
+FC Home Thin Italic ver 1.01
+FC Home Thin ver 1.01
+FC Iconic Bold
+FC Iconic Bold Italic
+FC Iconic Italic
+FC Iconic Regular
+FC Iconic Text Italic ver 1.00
+FC Iconic Text Regular ver 1.00
+FC Lamoon Bold Italic ver 1.00
+FC Lamoon Bold ver 1.00
+FC Lamoon Light Italic ver 1.00
+FC Lamoon Light ver 1.00
+FC Lamoon Regular Italic ver 1.00
+FC Lamoon Regular ver 1.00
+FC Marshmallow Brush Italic
+FC Marshmallow Brush Regular
+FC Marshmallow Italic
+FC Marshmallow Regular
+FC Minimal Bold
+FC Minimal Bold Italic
+FC Minimal Italic
+FC Minimal Regular
+FC Motorway Bold
+FC Motorway Bold Italic
+FC Motorway Italic
+FC Motorway Regular
+FC Motorway Semi-condensed Bold
+FC Motorway Semi-condensed Bold Italic
+FC Motorway Semi-condensed Italic
+FC Motorway Semi-condensed Regular
+FC Palette
+FC Palette Color
+FC Palette Color
+FC Palette Color Italic
+FC Palette Color Italic
+FC Palette Italic
+FCParagraph[Non-commercial]-Bold
+FCParagraph[Non-commercial]-Bold
+FCParagraph[Non-commercial]-BoldItalic
+FCParagraph[Non-commercial]-BoldItalic
+FCParagraph[Non-commercial]-Light
+FCParagraph[Non-commercial]-Light
+FCParagraph[Non-commercial]-LightItalic
+FCParagraph[Non-commercial]-LightItalic
+FCParagraph[Non-commercial]-Medium
+FCParagraph[Non-commercial]-Medium
+FCParagraph[Non-commercial]-MediumItalic
+FCParagraph[Non-commercial]-MediumItalic
+FC SaveSpace Italic ver 1.01
+FC SaveSpace Regular ver 1.01
+FC SaveSpace Rounded Italic
+FC SaveSpace Rounded Regular
+FC Subject Condensed Bold [Non-commercial use]
+FC Subject Condensed Bold [Non-commercial use]
+FC Subject Condensed Regular [Non-commercial use]
+FC Subject Rounded Bold [Non-commercial use]
+FC Subject Rounded Bold [Non-commercial use]
+FC Subject Rounded Regular [Non-commercial use]
+FC Subject Rounded Regular [Non-commercial use]
+FC Subject [Non-commercial use] Bold ver 1.00
+FC Subject [Non-commercial use] Bold ver 1.00
+FC Subject [Non-commercial use] Regular ver 1.00
+FC Subject [Non-commercial use] Regular ver 1.00
+FELIXTI
+FIGHTT
+Fontcraft ver 2.03
+FONTNONGNAM
+Forgiven
+Forgiven
+FORTD
+FORTE
+FRABK
+FRABKIT
+FRADM
+FRADMCN
+FRADMIT
+FRAHV
+FRAHVIT
+framd
+FRAMDCN
+framdit
+frank
+FrankRuehlCLM-Bold
+FrankRuehlCLM-Medium
+FrankRuhlHofshi-Bold
+FrankRuhlHofshi-Regular
+FREESCPT
+FREHD
+Frontman
+Frontman Outline
+Frontman Thin
+FRSCRIPT
+FTLTLT
+Fukuoka
+Gabriola
+gadugi
+gadugib
+GARA
+GARABD
+GARAIT
+gautami
+gautamib
+GenBasB
+GenBasBI
+GenBasI
+GenBasR
+GenBkBasB
+GenBkBasBI
+GenBkBasI
+GenBkBasR
+georgia
+georgiab
+georgiai
+GeorgiaPro-Black
+GeorgiaPro-BlackItalic
+GeorgiaPro-Bold
+GeorgiaPro-BoldItalic
+GeorgiaPro-CondBlack
+GeorgiaPro-CondBlackItalic
+GeorgiaPro-CondBold
+GeorgiaPro-CondBoldItalic
+GeorgiaPro-CondItalic
+GeorgiaPro-CondLight
+GeorgiaPro-CondLightItalic
+GeorgiaPro-CondRegular
+GeorgiaPro-CondSemiBold
+GeorgiaPro-CondSemiBoldItalic
+GeorgiaPro-Italic
+GeorgiaPro-Light
+GeorgiaPro-LightItalic
+GeorgiaPro-Regular
+GeorgiaPro-SemiBold
+GeorgiaPro-SemiBoldItalic
+georgiaz
+GHOSTBUS
+GiddyupStd
+GIGI
+GILBI_
+GILB__
+GILC__
+GILI__
+GillSansBoItNova
+GillSansBoNova
+GillSansCondBoItNova
+GillSansCondBoNova
+GillSansCondExtraItNova
+GillSansCondExtraNova
+GillSansCondItNova
+GillSansCondLightItNova
+GillSansCondLightNova
+GillSansCondNova
+GillSansCondUltraBoNova
+GillSansItNova
+GillSansLightItNova
+GillSansLightNova
+GillSansNova
+GillSansUltraBoNova
+GILLUBCD
+GILSANUB
+GIL___
+Gingerline Italic
+Gingerline Regular
+Girlesque
+gisha
+gishabd
+GLECB
+GLSNECB
+Go Mocha
+Go Mocha Outline
+Gordita Black
+Gordita Black Italic
+Gordita Bold
+Gordita Bold Italic
+Gordita Light
+Gordita Light Italic
+Gordita Medium
+Gordita Medium Italic
+Gordita Regular
+Gordita Regular Italic
+Gordita Thin
+Gordita Thin Italic
+Gordita Ultra
+Gordita Ultra Italic
+GOTHIC
+GOTHICB
+GOTHICBI
+GOTHICI
+gothika
+GOUDOS
+GOUDOSB
+GOUDOSI
+GOUDYSTO
+GREMLINS
+Handroberg
+Handroberg Alt
+happy
+HARLOWSI
+HARNGTON
+HATTEN
+Hellgate
+Hellgate Script
+Hello Sidney
+Heppy Holliday
+Hi Girls
+Hilland
+himalaya
+hinn-free_regular
+Hitman
+Hmuhmu
+HmuOan
+Hmuoan2
+Hmupan
+HMUYONG
+HoboStd
+Hole-HeartedRegular
+holomdl2
+Home Dream
+honeybold
+Hornet Black
+Hotel Coral Essex
+Hot Wax
+HTOWERT
+HTOWERTI
+hwmarbodb
+iannnnn-DOG-Bold
+iannnnn-DOG-Light
+iannnnn-DOG-Regular
+iannnnn-DUCK-Bold
+iannnnn-DUCK-Light
+iannnnn-DUCK-Regular
+IBMPlexSansThai-Bold
+IBMPlexSansThai-ExtraLight
+IBMPlexSansThai-Light
+IBMPlexSansThai-Medium
+IBMPlexSansThai-Regular
+IBMPlexSansThai-SemiBold
+IBMPlexSansThai-Thin
+IBMPlexSansThaiLooped-Bold
+IBMPlexSansThaiLooped-ExtraLight
+IBMPlexSansThaiLooped-Light
+IBMPlexSansThaiLooped-Medium
+IBMPlexSansThaiLooped-Regular
+IBMPlexSansThaiLooped-SemiBold
+IBMPlexSansThaiLooped-Thin
+impact
+Impossible
+IMPRISHA
+INFROMAN
+Inkfree
+InSeeDang
+InSeeDangBoldItalic
+iskpota
+iskpotab
+ITCBLKAD
+ITCEDSCR
+ITCKRIST
+Itim-Regular
+j.devilfont@Akhom2020-Italic DEMO
+j.devilfont@Akhom2020-Regular DEMO
+j.devilfont@Chuti2020-Demo
+j.devilfont@Drift King Ex Demo
+j.devilfont@Drift King Ex Italic Demo
+ja-jp
+javatext
+Jaymont Black
+Jaymont Black Italic
+Jaymont Bold
+Jaymont Bold Italic
+Jaymont Light
+Jaymont Light Italic
+Jaymont Medium
+Jaymont Medium Italic
+Jaymont Thin
+Jaymont Thin Italic
+Jeans
+JOKERMAN
+JS-Angsumalin
+JS-AngsumalinBold
+JS-AngsumalinBoldItalic
+JS-AngsumalinItalic
+JS-Arisa
+JS-ArisaBold
+JS-ArisaBoldItalic
+JS-ArisaItalic
+JS-Boaboon
+JS-BoaboonBold
+JS-BoaboonBoldItalic
+JS-BoaboonItalic
+JS-Chaimongkol
+JS-ChaimongkolBold
+JS-ChaimongkolBoldItalic
+JS-ChaimongkolItalic
+JS-Chalit
+JS-ChalitBold
+JS-ChalitItalic
+JS-Chanok
+JS-ChanokBold
+JS-ChanokBoldItalic
+JS-ChanokItalic
+JS-Charnchai
+JS-CharnchaiBold
+JS-CharnchaiBoldItalic
+JS-CharnchaiItalic
+JS-Chawlewhieng
+JS-ChawlewhiengBold
+JS-ChawlewhiengBoldItalic
+JS-ChawlewhiengItalic
+JS-Chulee
+JS-ChuleeBold
+JS-ChuleeBoldItalic
+JS-ChuleeItalic
+JS-Chusri
+JS-ChusriBold
+JS-ChusriBoldItalic
+JS-ChusriItalic
+JS-Duangta
+JS-DuangtaBold
+JS-DuangtaBoldItalic
+JS-DuangtaItalic
+JS-Ekachai
+JS-EkachaiBold
+JS-EkachaiBoldItalic
+JS-EkachaiItalic
+JS-Giat
+JS-GiatBold
+JS-GiatBoldItalic
+JS-GiatItalic
+JS-Hariphan
+JS-HariphanBold
+JS-HariphanBoldItalic
+JS-HariphanItalic
+JS-Jetarin
+JS-JetarinBold
+JS-Jindara
+JS-JindaraBold
+JS-JindaraBoldItalic
+JS-JindaraItalic
+JS-Jukaphan
+JS-JukaphanBold
+JS-JukaphanBoldItalic
+JS-JukaphanItalic
+JS-Karabow
+JS-KarabowBold
+JS-KarabowBoldItalic
+JS-KarabowItalic
+JS-Khunwai
+JS-KhunwaiBold
+JS-KhunwaiBoldItalic
+JS-KhunwaiItalic
+JS-Kobori Allcaps
+JS-Kobori AllcapsItalic
+JS-Korakhot
+JS-KorakhotBold
+JS-KorakhotBoldItalic
+JS-KorakhotItalic
+JS-Laongdao
+JS-LaongdaoBold
+JS-LaongdaoBoldItalic
+JS-LaongdaoItalic
+JS-Likhit
+JS-LikhitBold
+JS-LikhitBoldItalic
+JS-LikhitItalic
+JS-Macha
+JS-MachaBold
+JS-MachaBoldItalic
+JS-MachaItalic
+JS-Mookda
+JS-MookdaBold
+JS-MookdaBoldItalic
+JS-MookdaItalic
+JS-NeenoBold
+JS-NeenoBoldItalic
+JS-NeenoItalic
+JS-Ninja Allcaps
+JS-Ninja AllcapsBold
+JS-Ninja AllcapsBoldItalic
+JS-Ninja AllcapsItalic
+JS-Noklae
+JS-NoklaeBold
+JS-NoklaeBoldItalic
+JS-NoklaeItalic
+JS-NussabaBold
+JS-NussabaBoldItalic
+JS-NussabaItalic
+JS-Obsaward
+JS-ObsawardBold
+JS-ObsawardBoldItalic
+JS-ObsawardItalic
+JS-Oobboon
+JS-OobboonBold
+JS-OobboonBoldItalic
+JS-OobboonItalic
+JS-PadachamaiBold
+JS-PadachamaiBoldItalic
+JS-PadachamaiItalic
+JS-Pisit
+JS-PisitBold
+JS-PisitBoldItalic
+JS-PisitItalic
+JS-Pitsamai
+JS-PitsamaiBoldItalic
+JS-PitsamaiItalic
+JS-Pitsanu
+JS-PitsanuBold
+JS-PitsanuBoldItalic
+JS-PitsanuItalic
+JS-Prajuk
+JS-PrajukBold
+JS-PrajukBoldItalic
+JS-PrajukItalic
+JS-PraneeBold
+JS-PraneeBoldItalic
+JS-PraneeItalic
+JS-Prapakorn
+JS-PrapakornBold
+JS-PrapakornBoldItalic
+JS-PrapakornItalic
+JS-Prasoplarp
+JS-PrasoplarpBold
+JS-PrasoplarpBoldItalic
+JS-PrasoplarpItalic
+JS-Puchong
+JS-PuchongBold
+JS-PuchongBoldItalic
+JS-PuchongItalic
+JS-Pudgrong
+JS-PudgrongBold
+JS-PudgrongBoldItalic
+JS-PudgrongItalic
+JS-Rapee
+JS-RapeeBold
+JS-RapeeBoldItalic
+JS-RapeeItalic
+JS-Sadayu
+JS-SadayuBold
+JS-SadayuBoldItalic
+JS-SadayuItalic
+JS-Saksit
+JS-SaksitBoldItalic
+JS-SaksitItalic
+JS-Samurai
+JS-SamuraiBold
+JS-SamuraiBoldItalic
+JS-SamuraiItalic
+JS-Sangravee
+JS-SangraveeBold
+JS-SangraveeBoldItalic
+JS-SangraveeItalic
+JS-Saowapark
+JS-SaowaparkBold
+JS-SaowaparkBoldItalic
+JS-SaowaparkItalic
+JS-Sarunya
+JS-SarunyaBold
+JS-SarunyaBoldItalic
+JS-SarunyaItalic
+JS-Setha
+JS-SethaBoldItalic
+JS-SethaItalic
+JS-Sirium
+JS-SiriumBold
+JS-Sunsanee
+JS-SunsaneeBold
+JS-SunsaneeBoldItalic
+JS-SunsaneeItalic
+JS-Synjai
+JS-SynjaiBold
+JS-SynjaiBoldItalic
+JS-SynjaiItalic
+JS-Thanaporn
+JS-ThanapornBold
+JS-ThanapornBoldItalic
+JS-ThanapornItalic
+JS-Tina
+JS-TinaBold
+JS-TinaBoldItalic
+JS-TinaItalic
+JS-Toomtam
+JS-ToomtamBold
+JS-ToomtamBoldItalic
+JS-ToomtamItalic
+JS-Wanida
+JS-Wannaree
+JS-WannareeBold
+JS-Yodthida
+JS-YodthidaBold
+JS-YodthidaBoldItalic
+JS-YodthidaItalic
+JS 75 Pumpuang
+JS Amphan Italic
+JS Angsumalin
+JS Arisa
+JS Arisa Italic
+JS Boaboon
+JS Chaimongkol
+JS Chalit
+JS Chanok Normal
+JS Charnchai Normal
+JS Chawlewhieng
+JS Chodok Bold
+JS Chulee
+JS Chusri Normal
+JS Duangta
+JS Giat Bold
+JS Hariphan
+JS Jetarin Italic
+JS Jindara Bold Italic
+JS Jindara Italic
+JS Jukaphan
+JS Jukaphan Italic
+JS Junkaew
+JS Junkaew Italic
+JS Karabow
+JS Khunwai
+JS Kobori Allcaps Bold
+JS Korakhot Normal
+JS Laongdao Bold
+JS Likhit Normal
+JS Macha Normal
+JS Mookravee Normal
+JS Neeno Normal
+JS Ninja Allcaps Bold
+JS Noklae Normal
+JS Obsaward Italic
+JS Oobboon Normal
+JS Padachamai Normal
+JS Pisit Italic
+JS Pisit Normal
+JS Pitsamai Italic
+JS Pitsanu
+JS Prajuk Italic
+JS Pranee Italic
+JS Prapakorn Italic
+JS Prasoplarp Italic
+JS Prasoplarp Normal
+JS Puchong Normal
+JS Pudgrong Normal
+JS Pumpuang Normal
+JS Puriphop Normal
+JS Rapee Bold
+JS Rapee Bold Italic
+JS Rapee Italic
+JS Rapee Normal
+JS Sadayu Allcaps
+JS Sadayu Bold
+JS Sadayu Bold Italic
+JS Saksit Bold
+JS Saksit Bold Italic
+JS Saksit Italic
+JS Saksit Normal
+JS Samurai Normal
+JS Sangravee Normal
+JS Saowapark Italic
+JS Saowapark Normal
+JS Sarunya Normal
+JS Setha Normal
+JS Sirium Normal
+JS Sunsanee Italic
+JS Sunsanee Normal
+JS Synjai Italic
+JS Synjai Normal
+JS Thanaporn Normal
+JS Tina Normal
+JS Toomtam Normal
+JS Wanida Italic
+JS Wannaree Italic
+JS Wansika Italic
+JS Yodthida
+JS Yodthida Italic
+JUICE_
+Juntra2
+Juntra3
+K2D-Bold
+K2D-BoldItalic
+K2D-ExtraBold
+K2D-ExtraBoldItalic
+K2D-ExtraLight
+K2D-ExtraLightItalic
+K2D-Italic
+K2D-Light
+K2D-LightItalic
+K2D-Medium
+K2D-MediumItalic
+K2D-Regular
+K2D-SemiBold
+K2D-SemiBoldItalic
+K2D-Thin
+K2D-ThinItalic
+Kaidao
+KAIPOM
+KAIPOM2
+KAIPOM3
+Kaitom
+Kaitom2
+Kaitun2000
+Kaitun2001
+kaiu
+Kaiwarn
+Kaiwarn2
+Kaiwarn3
+Kaiwarn5
+kalinga
+kalingab
+Kanit-Black
+Kanit-BlackItalic
+Kanit-Bold
+Kanit-BoldItalic
+Kanit-ExtraBold
+Kanit-ExtraBoldItalic
+Kanit-ExtraLight
+Kanit-ExtraLightItalic
+Kanit-Italic
+Kanit-Light
+Kanit-LightItalic
+Kanit-Medium
+Kanit-MediumItalic
+Kanit-Regular
+Kanit-SemiBold
+Kanit-SemiBoldItalic
+Kanit-Thin
+Kanit-ThinItalic
+Kanyanut uni
+kartika
+kartikab
+Kastella Script
+Kastella Script
+KhmerUI
+KhmerUIb
+King Cool KC
+Kinnari
+Kinnari-Bold
+Kinnari-Oblique
+Kiperman Bold
+Kiperman Bold Italic
+Kiperman Italic
+Kiperman Regular
+KJR-VACHIRAPORN-TODLONG
+KJR KRAJIDRID PHARMAI
+KJR RAKSIAM Todlong
+Kodchasan-Bold
+Kodchasan-BoldItalic
+Kodchasan-ExtraLight
+Kodchasan-ExtraLightItalic
+Kodchasan-Italic
+Kodchasan-Light
+Kodchasan-LightItalic
+Kodchasan-Medium
+Kodchasan-MediumItalic
+Kodchasan-Regular
+Kodchasan-SemiBold
+Kodchasan-SemiBoldItalic
+KoHmu
+Kohmu2
+Kohmu3
+KoHo-Bold
+KoHo-BoldItalic
+KoHo-ExtraLight
+KoHo-ExtraLightItalic
+KoHo-Italic
+KoHo-Light
+KoHo-LightItalic
+KoHo-Medium
+KoHo-MediumItalic
+KoHo-Regular
+KoHo-SemiBold
+KoHo-SemiBoldItalic
+kokila
+kokilab
+kokilabi
+kokilai
+korbau
+KoYup
+KozGoPr6N-Bold
+KozGoPr6N-ExtraLight
+KozGoPr6N-Heavy
+KozGoPr6N-Light
+KozGoPr6N-Medium
+KozGoPr6N-Regular
+KozGoPro-Bold
+KozGoPro-ExtraLight
+KozGoPro-Heavy
+KozGoPro-Light
+KozGoPro-Medium
+KozGoPro-Regular
+KozMinPr6N-Bold
+KozMinPr6N-ExtraLight
+KozMinPr6N-Heavy
+KozMinPr6N-Light
+KozMinPr6N-Medium
+KozMinPr6N-Regular
+KozMinPro-Bold
+KozMinPro-ExtraLight
+KozMinPro-Heavy
+KozMinPro-Light
+KozMinPro-Medium
+KozMinPro-Regular
+KRR-Swordsman 1992 DEMO
+KRR-THAISPIRIT
+KRRYuttachak DEMO
+KRR_AengAei
+KRR_HutSha
+Krub-Bold
+Krub-BoldItalic
+Krub-ExtraLight
+Krub-ExtraLightItalic
+Krub-Italic
+Krub-Light
+Krub-LightItalic
+Krub-Medium
+Krub-MediumItalic
+Krub-Regular
+Krub-SemiBold
+Krub-SemiBoldItalic
+KS HINTHAI
+KS NOMTAWAN
+KS PIMCHNOK
+KS PUTTARUKSA
+KS RELATHAI    Italic
+KS SUDIN
+KS THAIKASAM Bold
+ks_ksam
+ks_myhand
+ks_ribbin
+ks_thaikasam
+KT Downtheline
+KT Downtheline - Bold
+kt_smarn
+kt_smarn seree
+kt_smarnspecial
+KT_Wondwerfool
+KUNSTLER
+LaoUI
+LaoUIb
+latha
+lathab
+LATINWD
+LatoWeb-Bold
+LatoWeb-BoldItalic
+LatoWeb-Italic
+LatoWeb-Light
+LatoWeb-LightItalic
+LatoWeb-Regular
+LatoWeb-Semibold
+LatoWeb-SemiboldItalic
+LayijiMahaniyom-Bao-1.2
+layiji mahaniyom1
+LayijiMahaniyom Bao
+LayijiMahaniyom Bao
+LayijiMahaniyomV1
+LayijiMahaniyomV1_61ot
+LayijiMahaniyomV105
+LayijiMahaniyomV105ot
+Layiji RuDuuRon
+Layiji RuDuuRon Mak
+Layiji RuDuuRon Yaow
+Layiji RuDuuRon YaowMak
+LayijiSarangheyo
+LayijiSarangheyo
+Layiji_kutlaimuu2
+Layiji_lenroonrang
+LBRITE
+LBRITED
+LBRITEDI
+LBRITEI
+LCALLIG
+Ledger-Regular
+LeelaUIb
+leelawad
+leelawdb
+LeelawUI
+LeelUIsl
+Legilature
+LEMONMILK-Bold
+LEMONMILK-BoldItalic
+LEMONMILK-Light
+LEMONMILK-LightItalic
+LEMONMILK-Medium
+LEMONMILK-MediumItalic
+LEMONMILK-Regular
+LEMONMILK-RegularItalic
+LetterGothicStd
+LetterGothicStd-Bold
+LetterGothicStd-BoldSlanted
+LetterGothicStd-Slanted
+LFAX
+LFAXD
+LFAXDI
+LFAXI
+LHANDW
+LiberationMono-Bold
+LiberationMono-BoldItalic
+LiberationMono-Italic
+LiberationMono-Regular
+LiberationSans-Bold
+LiberationSans-BoldItalic
+LiberationSans-Italic
+LiberationSans-Regular
+LiberationSansNarrow-Bold
+LiberationSansNarrow-BoldItalic
+LiberationSansNarrow-Italic
+LiberationSansNarrow-Regular
+LiberationSerif-Bold
+LiberationSerif-BoldItalic
+LiberationSerif-Italic
+LiberationSerif-Regular
+LinBiolinum_RB_G
+LinBiolinum_RI_G
+LinBiolinum_R_G
+LinLibertine_DR_G
+LinLibertine_RBI_G
+LinLibertine_RB_G
+LinLibertine_RI_G
+LinLibertine_RZI_G
+LinLibertine_RZ_G
+LinLibertine_R_G
+LithosPro-Black
+LithosPro-Regular
+Loma
+LomaBold
+LomaOblique
+Lomoor-Renew
+Long Liner
+lookpeach
+LSANS
+LSANSD
+LSANSDI
+LSANSI
+LTYPE
+LTYPEB
+LTYPEBO
+LTYPEO
+lucon
+l_10646
+maaja ver 1.00
+machinescript
+Madfont
+MAGNETOB
+Magnolia 1
+Magnolia Swashes
+MAIAN
+Maitree-Bold
+Maitree-ExtraLight
+Maitree-Light
+Maitree-Medium
+Maitree-Regular
+Maitree-SemiBold
+majalla
+majallab
+malgun
+malgunbd
+malgunsl
+Mali-Bold
+Mali-BoldItalic
+Mali-ExtraLight
+Mali-ExtraLightItalic
+Mali-Italic
+Mali-Light
+Mali-LightItalic
+Mali-Medium
+Mali-MediumItalic
+Mali-Regular
+Mali-SemiBold
+Mali-SemiBoldItalic
+mangal
+mangalb
+Mangrai
+Mansions Brush Script
+Marcheile Bold
+Marcheile Bold Condensed
+Marcheile Bold Line
+Marcheile Regular
+marlett
+MASQUE
+MATURASC
+MAX PINJOHN V2
+MAX somsin
+memory
+MesquiteStd
+micross
+Milk Child
+Miltown
+MinionPro-Bold
+MinionPro-BoldCn
+MinionPro-BoldCnIt
+MinionPro-BoldIt
+MinionPro-It
+MinionPro-Medium
+MinionPro-MediumIt
+MinionPro-Regular
+MinionPro-Semibold
+MinionPro-SemiboldIt
+MiriamCLM-Bold
+MiriamCLM-Book
+MiriamLibre-Bold
+MiriamLibre-Regular
+MiriamMonoCLM-Bold
+MiriamMonoCLM-Book
+MISTRAL
+Mitr-Bold
+Mitr-ExtraLight
+Mitr-Light
+Mitr-Medium
+Mitr-Regular
+Mitr-SemiBold
+MMCOFFICE-Bold
+MMCOFFICE-Medium
+MMCOFFICE-Regular
+mmrtext
+mmrtextb
+MN Chaochom
+MN Chaochom Bold
+MN Chaochom Bold Italic
+MN Chaochom Italic
+MN CHAYEN
+MN CHAYEN Italic
+MN WASABI
+MN WASABI Bold
+MN WASABI Bold Italic
+MN WASABI Italic
+MOD20
+Modaro
+Modaro
+monbaiti
+Montserrat-Black
+Montserrat-BlackItalic
+Montserrat-Bold
+Montserrat-BoldItalic
+Montserrat-ExtraBold
+Montserrat-ExtraBoldItalic
+Montserrat-ExtraLight
+Montserrat-ExtraLightItalic
+Montserrat-Italic
+Montserrat-Light
+Montserrat-LightItalic
+Montserrat-Medium
+Montserrat-MediumItalic
+Montserrat-Regular
+Montserrat-SemiBold
+Montserrat-SemiBoldItalic
+Montserrat-Thin
+Montserrat-ThinItalic
+moolbor
+mriam
+mriamc
+mriamfx
+mriamtr
+mstmc
+MSUIGHUB
+MSUIGHUR
+msyi
+MTCORSVA
+MTEXTRA
+Multicultural
+mvboli
+MyriadArabic-Bold
+MyriadArabic-BoldIt
+MyriadArabic-It
+MyriadArabic-Regular
+MyriadHebrew-Bold
+MyriadHebrew-BoldIt
+MyriadHebrew-It
+MyriadHebrew-Regular
+MyriadPro-Bold
+MyriadPro-BoldCond
+MyriadPro-BoldCondIt
+MyriadPro-BoldIt
+MyriadPro-Cond
+MyriadPro-CondIt
+MyriadPro-It
+MyriadPro-Regular
+MyriadPro-Semibold
+MyriadPro-SemiboldIt
+NachlieliCLM-Bold
+NachlieliCLM-Light
+Nakaracha Bold
+NantatOO_1.1.1
+Neronian Little_Star
+Nesdate October Ten
+Nesdate October Ten Italic
+NHaasGroteskTXPro-It
+NHaasGroteskTXPro-Rg
+NIAGENG
+NIAGSOL
+Niramit-Bold
+Niramit-BoldItalic
+Niramit-ExtraLight
+Niramit-ExtraLightItalic
+Niramit-Italic
+Niramit-Light
+Niramit-LightItalic
+Niramit-Medium
+Niramit-MediumItalic
+Niramit-Regular
+Niramit-SemiBold
+Niramit-SemiBoldItalic
+Nirmala
+NirmalaB
+NirmalaS
+Nithan
+NLT-OTTO
+NomadaSans-Black
+NomadaSans-BlackItalic
+NomadaSans-Bold
+NomadaSans-BoldItalic
+NomadaSans-Extrablack
+NomadaSans-ExtrablackItalic
+NomadaSans-Extrathin
+NomadaSans-ExtrathinItalic
+NomadaSans-Hairline
+NomadaSans-HairlineItalic
+NomadaSans-Light
+NomadaSans-LightItalic
+NomadaSans-Medium
+NomadaSans-MediumItalic
+NomadaSans-Regular
+NomadaSans-RegularItalic
+NomadaSans-Thin
+NomadaSans-ThinItalic
+Noodle Demo
+Norasi
+Norasi-Bold
+Norasi-Oblique
+NotoKufiArabic-Bold
+NotoKufiArabic-Regular
+NotoMono-Regular
+NotoNaskhArabic-Bold
+NotoNaskhArabic-Regular
+NotoNaskhArabicUI-Bold
+NotoNaskhArabicUI-Regular
+NotoSansArabic-Bold
+NotoSansArabic-Regular
+NotoSansArabicUI-Bold
+NotoSansArabicUI-Regular
+NotoSansArmenian-Bold
+NotoSansArmenian-Regular
+NotoSansGeorgian-Bold
+NotoSansGeorgian-Regular
+NotoSansHebrew-Bold
+NotoSansHebrew-Regular
+NotoSansLao-Bold
+NotoSansLao-Regular
+NotoSansLisu-Regular
+NotoSansThai-Black
+NotoSansThai-Bold
+NotoSansThai-ExtraBold
+NotoSansThai-ExtraLight
+NotoSansThai-Light
+NotoSansThai-Medium
+NotoSansThai-SemiBold
+NotoSansThai-Thin
+NotoSansThai-VariableFont_wdth,wght
+NotoSansThaiLooped-Black
+NotoSansThaiLooped-Bold
+NotoSansThaiLooped-ExtraBold
+NotoSansThaiLooped-ExtraLight
+NotoSansThaiLooped-Light
+NotoSansThaiLooped-Medium
+NotoSansThaiLooped-Regular
+NotoSansThaiLooped-SemiBold
+NotoSansThaiLooped-Thin
+NotoSansThai_Condensed-Black
+NotoSansThai_Condensed-Bold
+NotoSansThai_Condensed-ExtraBold
+NotoSansThai_Condensed-ExtraLight
+NotoSansThai_Condensed-Light
+NotoSansThai_Condensed-Medium
+NotoSansThai_Condensed-Regular
+NotoSansThai_Condensed-SemiBold
+NotoSansThai_Condensed-Thin
+NotoSansThai_ExtraCondensed-Black
+NotoSansThai_ExtraCondensed-Bold
+NotoSansThai_ExtraCondensed-ExtraBold
+NotoSansThai_ExtraCondensed-ExtraLight
+NotoSansThai_ExtraCondensed-Light
+NotoSansThai_ExtraCondensed-Medium
+NotoSansThai_ExtraCondensed-Regular
+NotoSansThai_ExtraCondensed-SemiBold
+NotoSansThai_ExtraCondensed-Thin
+NotoSansThai_SemiCondensed-Black
+NotoSansThai_SemiCondensed-Bold
+NotoSansThai_SemiCondensed-ExtraBold
+NotoSansThai_SemiCondensed-ExtraLight
+NotoSansThai_SemiCondensed-Light
+NotoSansThai_SemiCondensed-Medium
+NotoSansThai_SemiCondensed-Regular
+NotoSansThai_SemiCondensed-SemiBold
+NotoSansThai_SemiCondensed-Thin
+NotoSerif-Bold
+NotoSerif-BoldItalic
+NotoSerif-Condensed
+NotoSerif-CondensedBold
+NotoSerif-CondensedBoldItalic
+NotoSerif-CondensedItalic
+NotoSerif-Italic
+NotoSerif-Light
+NotoSerif-LightItalic
+NotoSerif-Regular
+NotoSerifArmenian-Bold
+NotoSerifArmenian-Regular
+NotoSerifGeorgian-Bold
+NotoSerifGeorgian-Regular
+NotoSerifHebrew-Bold
+NotoSerifHebrew-Regular
+NotoSerifLao-Bold
+NotoSerifLao-Regular
+NotoSerifThai-Black
+NotoSerifThai-Bold
+NotoSerifThai-ExtraBold
+NotoSerifThai-ExtraLight
+NotoSerifThai-Light
+NotoSerifThai-Medium
+NotoSerifThai-SemiBold
+NotoSerifThai-Thin
+NotoSerifThai-VariableFont_wdth,wght
+NotoSerifThai_Condensed-Black
+NotoSerifThai_Condensed-Bold
+NotoSerifThai_Condensed-ExtraBold
+NotoSerifThai_Condensed-ExtraLight
+NotoSerifThai_Condensed-Light
+NotoSerifThai_Condensed-Medium
+NotoSerifThai_Condensed-Regular
+NotoSerifThai_Condensed-SemiBold
+NotoSerifThai_Condensed-Thin
+NotoSerifThai_ExtraCondensed-Black
+NotoSerifThai_ExtraCondensed-Bold
+NotoSerifThai_ExtraCondensed-ExtraBold
+NotoSerifThai_ExtraCondensed-ExtraLight
+NotoSerifThai_ExtraCondensed-Light
+NotoSerifThai_ExtraCondensed-Medium
+NotoSerifThai_ExtraCondensed-Regular
+NotoSerifThai_ExtraCondensed-SemiBold
+NotoSerifThai_SemiCondensed-Black
+NotoSerifThai_SemiCondensed-Bold
+NotoSerifThai_SemiCondensed-ExtraBold
+NotoSerifThai_SemiCondensed-ExtraLight
+NotoSerifThai_SemiCondensed-Light
+NotoSerifThai_SemiCondensed-Medium
+NotoSerifThai_SemiCondensed-Regular
+NotoSerifThai_SemiCondensed-SemiBold
+NotoSerifThai_SemiCondensed-Thin
+NP Chinese new year
+NP Grand Opening F0NTDoTCoM_i
+NP Grand Opening F0NTDoTCoM_r
+NP Happy birthday_i
+NP Happy birthday_r
+NP Happy new year_i
+NP Happy new year_r
+NPK-Sumalee14
+NP Naipol All in One
+NP Naipol All in One_bi
+NP Naipol All in One_i
+NP Naipol All in One_r
+NP Naipol Template
+nrkis
+ntailu
+ntailub
+NuevaStd-Bold
+NuevaStd-BoldCond
+NuevaStd-BoldCondItalic
+NuevaStd-Cond
+NuevaStd-CondItalic
+NuevaStd-Italic
+nyala
+OCRAEXT
+OCRAStd
+Oh Wonder
+Oh Wonder Sans
+Oh Wonder Sans Bold
+Oh Wonder Upright
+OLDENGL
+Omelet
+ONYX
+opens__
+Opera
+Opun-Regular
+OratorStd
+OratorStd-Slanted
+OUTLOOK
+P5_MOOK
+P5_SUWAT
+P5_UPCAB
+P5_UPCAL
+P5_UPCBB
+P5_UPCBL
+P5_UPCCB
+P5_UPCCL
+P5_UPCDB
+P5_UPCDL
+P5_UPCEB
+P5_UPCEL
+P5_UPCFB
+P5_UPCFL
+P5_UPCIB
+P5_UPCIL
+P5_UPCJB
+P5_UPCJL
+P5_UPCKB
+P5_UPCKL
+P5_UPCLB
+P5_UPCLL
+P5_WATAI
+P5_YAOWA
+paaymaay_regular
+pala
+palab
+palabi
+palai
+PALSCRI
+PAPYRUS
+PARCHM
+Pattaya-Regular
+PeachPlay
+Peach_TV
+Pedrita
+PenChoovItalicX
+PenChoovX
+Penniless
+PERBI_
+PERB__
+PERI__
+Personality
+Personality Black
+Personality Dot
+PERTIBD
+PERTILI
+PER___
+PGVIM
+phagspa
+phagspab
+PL-EDIT1.02
+plantc
+PLAYBILL
+Playon
+Playon Italic
+PLE_Aon
+PLE_AonBold
+PLE_AonOutline
+PLE_AonWide
+PLE_Cara
+PLE_Care
+PLE_Care Bold
+PLE_Dirty Type
+PLE_Haft
+PLE_Haft Outline
+PLE_Heart
+PLE_Joy
+PLE_Lanna
+PLE_Lanna Bold
+PLE_Lanna Condensed
+PLE_Node
+PLE_Node Bold
+PLE_Script
+PLE_Script Outline
+PLE_Tom
+PLE_Tom Bold
+PLE_Tom Outline
+PLE_Tom Wide
+PLE_Type
+PLE_Type2
+PLE_Type2 Outline
+PLE_Type Outline
+Polythem
+POORICH
+PoplarStd
+PoppyAOE
+Prastha
+Prastha Thin
+Prastha Thin
+PrestigeEliteStd-Bd
+Pridi-Bold
+Pridi-ExtraLight
+Pridi-Light
+Pridi-Medium
+Pridi-Regular
+Pridi-SemiBold
+PrintAble4U Bold Italic ver 1.00
+PrintAble4U Bold ver 1.00
+PrintAble4U Italic ver 1.00
+PrintAble4U Regular ver 1.00
+PRISTINA
+Priyati-Regular
+Prompt-Black
+Prompt-BlackItalic
+Prompt-Bold
+Prompt-BoldItalic
+Prompt-ExtraBold
+Prompt-ExtraBoldItalic
+Prompt-ExtraLight
+Prompt-ExtraLightItalic
+Prompt-Italic
+Prompt-Light
+Prompt-LightItalic
+Prompt-Medium
+Prompt-MediumItalic
+Prompt-Regular
+Prompt-SemiBold
+Prompt-SemiBoldItalic
+Prompt-Thin
+Prompt-ThinItalic
+PSL-01
+PSL-02
+PSL-03
+PSL-04
+PSL-05
+PSL-06
+PSL-07
+PSL-08
+PSL-09
+PSL-10
+PSL-11
+PSL-12
+PSL-13
+PSL-14
+PSL-15
+PSL-16
+PSL-17
+PSL-18
+PSL-19
+PSL-20
+PSL-21
+PSL-22
+PSL-23
+PSL-24
+PSL-25
+PSL-26
+PSL-27
+PSL-28
+PSL-29
+PSL-30
+PSL-31
+PSL-32
+PSL-33
+PSL-34
+PSL-35
+PSL-36
+PSL-37
+PSL-38
+PSL-39
+PSL-40
+PSL-41
+PSL-42
+PSL-43
+PSL-44
+PSL-45
+PSL-46
+PSL-47
+PSL-48
+PSL-49
+PSL-50
+PSL-51
+PSL-52
+PSL-53
+PSL-54
+PSL-55
+PSL-56
+PSL-57
+PSL-58
+PSL-59
+PSL-60
+PSL-61
+PSL-62
+PSL-63
+PSL-64
+PSL-65
+PSL-66
+PSL-67
+PSL-68
+PSL-69
+PSL-70
+PSL-71
+PSL-72
+PSL-73
+PSL-74
+PSL-75
+PSL-76
+PSL-77
+PSL-78
+PSL-79
+PSL-80
+PSL-81
+PSL-82
+PSL-83
+PSL-84
+PSL-85
+PSL-A
+PSL-AB
+PSL-ABI
+PSL-AB_0
+PSL-AB~2
+PSL-AB~4
+PSL-AI
+PSL-AI_0
+PSL-AI~1
+PSL-AS~1
+PSL-A_0
+PSL-BB
+PSL-BBI
+PSL-BI
+PSL-C
+PSL-CB
+PSL-CB~1
+PSL-CC
+PSL-CI
+psl-d
+PSL-DB
+PSL-DBI
+PSL-DI
+PSL-EE
+PSL-EEB
+PSL-EEBI
+PSL-EEI
+PSL-I
+PSL-IB
+PSL-IBI
+PSL-IBI0
+PSL-IBI0_0
+PSL-IB_0
+PSL-IE
+PSL-IEB
+PSL-IEBI
+PSL-IEI
+PSL-II
+PSL-II_0
+PSL-IS~1
+PSL-I_0
+PSL-J
+PSL-JB
+PSL-JBI
+PSL-JI
+PSL-M
+PSL-MB
+PSL-MBI
+PSL-MI
+PSL-P
+PSL-PB
+PSL-PBI
+PSL-PBI0
+PSL-PBI0_0
+PSL-PB_0
+PSL-PI
+PSL-PI_0
+PSL-PS~0
+PSL-P_0
+PSL-S
+PSL-SB
+PSL-SBI
+PSL-SBI0
+PSL-SI
+PSL-Sirintr
+PSL-SirintrBold
+PSL-SirintrBoldItalic
+PSL-SirintrBoldItalic_0
+PSL-SirintrItalic
+PSL-SI_0
+PSL-SO
+PSL-SOI
+PSL-SS
+PSL-SSI
+PSL-T
+PSL-TB
+PSL-TBI
+PSL-TC
+PSL-TCB
+PSL-TCBI
+PSL-TCI
+PSL-TI
+psl001ad
+psl002ad
+psl003ad
+psl004ad
+psl005ad
+psl006ad
+psl007ad
+psl008ad
+psl009ad
+psl010ad
+psl011ad
+psl012ad
+psl013ad
+psl014ad
+psl015ad
+psl016ad
+psl017ad
+psl018ad
+psl019ad
+psl020ad
+psl021ad
+psl022ad
+psl023ad
+psl024ad
+psl025ad
+psl026ad
+psl027ad
+psl028ad
+psl029ad
+psl030ad
+psl031ad
+psl032ad
+psl033ad
+psl034ad
+psl035ad
+psl036ad
+psl037ad
+psl038ad
+psl039ad
+psl040ad
+psl041ad
+psl042ad
+psl043ad
+psl044ad
+psl045ad
+psl046ad
+psl047ad
+psl048ad
+psl049ad
+psl050ad
+psl051ad
+psl052ad
+psl053ad
+psl054ad
+psl055ad
+psl056ad
+psl057ad
+psl058ad
+psl059ad
+psl060ad
+psl061ad
+psl062ad
+psl063ad
+psl064ad
+psl065ad
+psl066ad
+psl067ad
+psl068ad
+psl069ad
+psl070ad
+psl071ad
+psl072ad
+psl073ad
+psl074ad
+psl075ad
+psl076ad
+psl077ad
+psl078ad
+psl079ad
+psl080ad
+psl081ad
+psl082ad
+psl083ad
+psl084ad
+psl085ad
+psl086ad
+psl087ad
+psl088ad
+psl089ad
+psl090ad
+psl091ad
+psl092ad
+psl093ad
+psl094ad
+psl095ad
+psl096ad
+psl097ad
+psl098ad
+psl099ad
+psl100ad
+psl101ad
+psl102ad
+psl103ad
+psl104ad
+psl105ad
+psl106ad
+psl107ad
+psl108ad
+psl109ad
+psl110ad
+psl111ad
+psl112ad
+psl113ad
+psl114ad
+psl115ad
+psl116ad
+psl117ad
+psl118ad
+PSL118SP
+psl119ad
+psl120ad
+psl121ad
+psl122ad
+psl123ad
+psl124ad
+psl125ad
+psl126ad
+psl127ad
+psl128ad
+psl129ad
+psl130ad
+psl131ad
+psl132ad
+psl133ad
+psl134ad
+psl135ad
+psl136ad
+psl137ad
+psl138ad
+psl139ad
+psl140ad
+psl140sp
+psl141ad
+psl142ad
+psl143ad
+psl144ad
+psl145ad
+PSLCC
+PSLCCB
+PSLCCBI
+PSLCCI
+PSLCD3310
+PSLCDMatrixII
+PSLKB
+PSLKBI
+PSLKI
+PSLKITTI
+PSLMALIN
+PSLMEB~1
+PSLMEB~2
+PSLMEI~1
+PSLMETHI
+PSLMI
+PSLMIB~1
+PSLMIB~2
+PSLMII~1
+PSLMITTR
+PSLNARIS
+PSLNB
+PSLNBI
+PSLNI
+PSLOI
+PSLOLARN
+PSLOMB~1
+PSLOMB~2
+PSLOMI~1
+PSLOMYIM
+PSLPAB~1
+PSLPAB~2
+PSLPAI~1
+PSLPASSA
+PSLPATTR
+PSLPB
+PSLPBI
+PSLPI
+PSLPIB~1
+PSLPIB~2
+PSLPII~1
+PSLPIMRU
+PSLSB
+PSLSBI
+PSLSCRIP
+PSLSI
+PSLSSR~1
+PSLSSR~1_0
+PSLSSR~3
+PSLSSR~4
+PSLTA
+PSLTAB
+PSLTABI
+PSLTAI
+Psluxamon
+PSLxAdvert
+PSLxAdvert Bold
+PSLxAdvert BoldItalic
+PSLxAdvert Italic
+PSLxAkkhanee
+PSLxAkkhanee Bold
+PSLxAkkhanee BoldItalic
+PSLxAkkhanee Italic
+PSLxAsadong
+PSLxAsadong Bold
+PSLxAsadong BoldItalic
+PSLxAsadong Italic
+PSLxBundit
+PSLxBundit Bold
+PSLxBundit BoldItalic
+PSLxBundit Italic
+PSLxChalalaiClassic
+PSLxChalindaCon
+PSLxChalindaCon Bold
+PSLxChalindaCon BoldItalic
+PSLxChalindaCon Italic
+PSLxChamnarn
+PSLxChamnarn Bold
+PSLxChamnarn BoldItalic
+PSLxChamnarn Italic
+PSLxDisplay
+PSLxDisplay Bold
+PSLxDisplay BoldItalic
+PSLxDisplay Italic
+PSLxEmpireExtra
+PSLxEmpireExtra Bold
+PSLxEmpireExtra BoldItalic
+PSLxEmpireExtra Italic
+PSLxImperial
+PSLxImperial Bold
+PSLxImperial BoldItalic
+PSLxImperialExtra
+PSLxImperialExtra Bold
+PSLxImperialExtra BoldItal
+PSLxImperialExtra Italic
+PSLxImperial Italic
+PSLxIrene
+PSLxIrene Bold
+PSLxIrene BoldItalic
+PSLxIrene Italic
+PSLxJarin
+PSLxJarin Bold
+PSLxJarin BoldItalic
+PSLxJarin Italic
+PSLxKittithada
+PSLxKittithada Bold
+PSLxKittithada BoldItalic
+PSLxKittithada Italic
+PSLxMajestic
+PSLxMajestic Bold
+PSLxMajestic BoldItalic
+PSLxMajestic Italic
+PSLxMalinee
+PSLxMalinee Italic
+PSLxMethinee
+PSLxMethinee Bold
+PSLxMethinee BoldItalic
+PSLxMethinee Italic
+PSLxMittrapab
+PSLxMittrapab Bold
+PSLxMittrapab BoldItalic
+PSLxMittrapab Italic
+PSLxNarissara
+PSLxNarissara Bold
+PSLxNarissara BoldItalic
+PSLxNarissara Italic
+PSLxOlarn
+PSLxOlarn Italic
+PSLxOmyim
+PSLxOmyim Bold
+PSLxOmyim BoldItalic
+PSLxOmyim Italic
+PSLxPaksin
+PSLxPaksin Bold
+PSLxPaksin BoldItalic
+PSLxPaksin Italic
+PSLxPanpilas
+PSLxPanpilas Bold
+PSLxPassanun
+PSLxPassanun Bold
+PSLxPassanun BoldItalic
+PSLxPassanun Italic
+PSLxPattriya
+PSLxPattriya Bold
+PSLxPattriya BoldItalic
+PSLxPattriya Italic
+PSLxPimruedee
+PSLxPimruedee Bold
+PSLxPimruedee BoldItalic
+PSLxPimruedee Italic
+PSLxPojamarn
+PSLxPojamarn Bold
+PSLxPojamarn BoldItalic
+PSLxPojamarn Italic
+PSLxPrathom
+PSLxPrathom Bold
+PSLxPrathom BoldItalic
+PSLxPrathom Italic
+PSLxSamson
+PSLxSamson Bold
+PSLxSamson BoldItalic
+PSLxSamson Italic
+PSLxSamsonOutline
+PSLxSamsonOutline Italic
+PSLxSamsonStar
+PSLxSamsonStar Italic
+PSLxScript
+PSLxScript Bold
+PSLxScript BoldItalic
+PSLxScript Italic
+PSLxSiara
+PSLxSiara Bold
+PSLxSiara BoldItalic
+PSLxSiara Italic
+PSLxSriSiam
+PSLxSriSiam Bold
+PSLxSriSiam BoldItalic
+PSLxSriSiam Italic
+PSLxText
+PSLxText Bold
+PSLxText BoldItalic
+PSLxText Italic
+PSLxThaiAntique
+PSLxThaiAntique Bold
+PSLxThaiAntique BoldItalic
+PSLxThaiAntique Italic
+PSLxThaiCommon
+PSLxThaiCommon Bold
+PSLxThaiCommon BoldItalic
+PSLxThaiCommon Italic
+PSLxYaowaraj
+PSLxYaowaraj Bold
+PSLxYaowaraj BoldItalic
+PSLxYaowaraj Italic
+PSLYAOWA
+PSLYB
+PSLYBI
+PSLYI
+Quark-Bold
+Quark-Light
+Questrial-Regular
+raavi
+raavib
+RAGE
+RaiNgan
+Rasty King
+RAVIE
+ReemKufi-Bold
+ReemKufi-Regular
+REFSAN
+REFSPCL
+ROCCB_
+ROCC__
+ROCK
+ROCKB
+ROCKBI
+ROCKEB
+ROCKI
+RockwellNova
+RockwellNova-Bold
+RockwellNova-BoldItalic
+RockwellNova-ExtraBold
+RockwellNova-ExtraBoldItalic
+RockwellNova-Italic
+RockwellNova-Light
+RockwellNova-LightItalic
+RockwellNovaCond
+RockwellNovaCond-Bold
+RockwellNovaCond-BoldItalic
+RockwellNovaCond-Italic
+RockwellNovaCond-Light
+RockwellNovaCond-LightItalic
+rod
+rodtr
+Rogue Sans Nova Bold
+Rogue Sans Nova Bold Italic
+Rogue Sans Nova Condensed Bold
+Rogue Sans Nova Condensed Bold Italic
+Rogue Sans Nova Condensed DemiBold
+Rogue Sans Nova Condensed DemiBold Italic
+Rogue Sans Nova Condensed ExtraLight
+Rogue Sans Nova Condensed ExtraLight Italic
+Rogue Sans Nova Condensed Light
+Rogue Sans Nova Condensed Light Italic
+Rogue Sans Nova Condensed Medium
+Rogue Sans Nova Condensed Medium Italic
+Rogue Sans Nova DemiBold
+Rogue Sans Nova DemiBold Italic
+Rogue Sans Nova Extended Bold
+Rogue Sans Nova Extended Bold Italic
+Rogue Sans Nova Extended DemiBold
+Rogue Sans Nova Extended DemiBold Italic
+Rogue Sans Nova Extended ExtraLight
+Rogue Sans Nova Extended ExtraLight Italic
+Rogue Sans Nova Extended Light
+Rogue Sans Nova Extended Light Italic
+Rogue Sans Nova Extended Medium
+Rogue Sans Nova Extended Medium Italic
+Rogue Sans Nova ExtraLight
+Rogue Sans Nova ExtraLight Italic
+Rogue Sans Nova Light
+Rogue Sans Nova Light Italic
+Rogue Sans Nova Medium
+Rogue Sans Nova Medium Italic
+RosewoodStd-Regular
+rtemehua1.35
+rtE Porama Regular
+rte_contrast_eta
+Rubik-Bold
+Rubik-BoldItalic
+Rubik-Italic
+Rubik-Regular
+SanamDeklen_chaya
+SanamDeklen_chaya
+Sangkala-Regular
+SanSern
+Sanskr
+SansSerifCollection
+Sarabun-Bold
+Sarabun-BoldItalic
+Sarabun-ExtraBold
+Sarabun-ExtraBoldItalic
+Sarabun-ExtraLight
+Sarabun-ExtraLightItalic
+Sarabun-Italic
+Sarabun-Light
+Sarabun-LightItalic
+Sarabun-Medium
+Sarabun-MediumItalic
+Sarabun-Regular
+Sarabun-SemiBold
+Sarabun-SemiBoldItalic
+Sarabun-Thin
+Sarabun-ThinItalic
+Sarun&#039;s ThangLuang
+Scheherazade-Bold
+Scheherazade-Regular
+SCHLBKB
+SCHLBKBI
+SCHLBKI
+SCRIPTBL
+sd chokdee
+sd hall
+sd klingon blade2
+sd masterpiece V.1
+sd newnormal
+sd prostreet 2
+sd rangver V.1
+sd so cute v.1
+sd so cute v.2
+sd startrek v.1
+sd startrek v.2
+sd startrek version2
+se-ed-patrawan-RJ
+segmdl2
+SegoeIcons
+segoepr
+segoeprb
+segoesc
+segoescb
+segoeui
+segoeuib
+segoeuii
+segoeuil
+segoeuisl
+segoeuiz
+seguibl
+seguibli
+seguiemj
+seguihis
+seguili
+seguisb
+seguisbi
+seguisli
+seguisym
+SegUIVar
+SF Fedora
+SF Fedora Titles
+SF Fedora Titles Shadow
+Shonar
+Shonarb
+SHOWG
+shruti
+shrutib
+Sigaro 3D
+Sigaro 3D
+simfang
+simkai
+simpbdo
+simpfxo
+simpo
+Simpsonfont
+simsunb
+SimsunExtG
+Sin City
+SitkaVF
+SitkaVF-Italic
+SNAP__
+SNT Anouvong Bold Regular
+SNT Anouvong Bold Regular Italic
+SNT Anouvong Medium Regular
+SNT Anouvong Medium Regular Italic
+SNT Anouvong Regular
+SNT Anouvong Regular Italic
+Sodera
+Sonny Vol 2 Black
+Sonny Vol 2 Black Italic
+Sonny Vol 2 Bold
+Sonny Vol 2 Bold Italic
+Sonny Vol 2 Book
+Sonny Vol 2 Book Italic
+Sonny Vol 2 Extra Bold
+Sonny Vol 2 Extra Bold Italic
+Sonny Vol 2 Light
+Sonny Vol 2 Light Italic
+Sonny Vol 2 Regular
+Sonny Vol 2 Regular Italic
+Sonny Vol 2 Thin
+Sonny Vol 2 Thin Italic
+Sonny Vol 2 Ultra Black
+Sonny Vol 2 Ultra Black Italic
+Sonny Vol 2 Ultra Light
+Sonny Vol 2 Ultra Light Italic
+SourceSans3-Regular
+SOV_Assadong
+SOV_JD_KraNok
+SOV_JD_Suksawad_L
+SOV_JD_Suksawad_M
+SOV_JD_Suksawad_R
+SOV_rajadamnern
+SOV_samchuk
+SOV_waree
+SOV_wayo
+SOV_wayo-Bold
+SP-Armageddon
+SP-Armageddon_Light
+SP-Digit
+SP-NoName
+SP-Normal
+SP-Paichueak
+SP-ThunderFox
+SP-ThunderFox-Bold
+SP-Tsunami
+SP-Yok FFE-N
+SP-Yok N
+SP-Yok NC
+Spaghetti
+Spaghetti Symbols
+Spookhaus
+Spookhaus Italic
+SR FahJon NP
+SR FahTHAIBold
+SR FahTHAIBoldItalic
+SR FahTHAIItalic
+SR FahTHAILight
+SR FahTHAILightItalic
+SR FahTHAIRegrlar
+Sriracha-Regular
+Srisakdi-Bold
+Srisakdi-Regular
+SRISURYWONGSE-Bold
+SRISURYWONGSE-Heavy
+SRISURYWONGSE-Italic
+SRISURYWONGSE-Regular
+STENCIL
+StencilStd
+Styniar
+supermarket
+Superspace Bold Italic ver 1.00
+Superspace Bold Italic ver 1.00
+Superspace Bold Slant ver 1.00
+Superspace Bold Slant ver 1.00
+Superspace Bold ver 1.00
+Superspace Light Italic ver 1.00
+Superspace Light Italic ver 1.00
+Superspace Light Slant ver 1.00
+Superspace Light Slant ver 1.00
+Superspace Light ver 1.00
+Superspace Regular Italic ver 1.00
+Superspace Regular Italic ver 1.00
+Superspace Regular ver 1.00
+Superspace Regular ver 1.00 Slant
+Superspace Regular ver 1.00 Slant
+Surafont Sanukchang Italic
+Surafont Sanukchang Italic
+Surafont Sanukchang Regular
+SuwannasonDEMO-Thin
+swordfish
+sylfaen
+symbol
+tahoma
+tahomabd
+tahomo
+taile
+taileb
+Tangen
+Taviraj-Black
+Taviraj-BlackItalic
+Taviraj-Bold
+Taviraj-BoldItalic
+Taviraj-ExtraBold
+Taviraj-ExtraBoldItalic
+Taviraj-ExtraLight
+Taviraj-ExtraLightItalic
+Taviraj-Italic
+Taviraj-Light
+Taviraj-LightItalic
+Taviraj-Medium
+Taviraj-MediumItalic
+Taviraj-Regular
+Taviraj-SemiBold
+Taviraj-SemiBoldItalic
+Taviraj-Thin
+Taviraj-ThinItalic
+TCBI__
+TCB___
+TCCB__
+TCCEB
+TCCM__
+TCMI__
+TCM___
+teamviewer15
+teaspoon
+TektonPro-Bold
+TektonPro-BoldCond
+TektonPro-BoldExt
+TektonPro-BoldObl
+TEMPSITC
+TEPC Aksaramatee
+TEPC Aksaramatee Bol
+TEPC Aksaramatee Bol Ita
+TEPC Aksaramatee Ita
+TEPC ChulaNarak
+TEPC ChulaNarak Bol
+TEPC ChulaNarak Bol Ital
+TEPC ChulaNarak Ita
+TEPC CM-Prasanmit
+TEPC CM-Prasanmit Bol
+TEPC CM-Prasanmit Bol Ita
+TEPC CM-Prasanmit Ita
+TEPC DC-Palamongkol
+TEPC DC-Palamongkol Bol
+TEPC DC-Palamongkol Bol Ita
+TEPC DC-Palamongkol Ita
+TEPC FonLeb
+TEPC FonLeb Bol
+TEPC FonLeb Bol Ita
+TEPC FonLeb Ita
+TEPC Himmaparnt
+TEPC Himmaparnt Bol
+TEPC Himmaparnt Bol Ita
+TEPC Himmaparnt Ita
+TEPC KaniGa
+TEPC KaniGa Bol
+TEPC KaniGa Bol Ital
+TEPC KaniGa Ita
+TEPC Nakaracha
+TEPC Nakaracha Bol
+TEPC Nakaracha Bol Ita
+TEPC Nakaracha Ita
+TEPC SmartPSK Bol
+TEPC SmartPSK Bol Ita
+TEPC SmartPSK Ita
+TEPC SmartPSK Reg
+TEPC SR-FahMai
+TEPC SR-FahMai Bold
+TEPC SR-FahMai Bold Italic
+TEPC SR-FahMai Italic
+terminator real nfi
+TF Arluck
+TF Arluck Bol
+TF Arluck Bol Ita
+TF Arluck Ita
+TF Chiangsaen
+TF Chiangsaen Bol
+TF Chiangsaen Bol Ita
+TF Chiangsaen Ita
+TF Intanon
+TF Lanna
+TF Lanna Bol
+TF Lanna Bol Ita
+TF Lanna Ita
+TF Manawika
+TF NopScript
+TF NopScript Bol
+TF NopScript Bol Ita
+TF NopScript Ita
+TF Phethai
+TF Phethai Ita
+TF Pimai
+TF Pimai Bol
+TF Pimai Bol Ita
+TF Pimai Ita
+TF Pimpakarn
+TF Pimpakarn Bol
+TF Pimpakarn Bol Ita
+TF Pimpakarn Extra
+TF Pimpakarn Extra Ita
+TF Pimpakarn Ita
+TF Ratchaphruek
+TF Ratchaphruek Bol
+TF Srivichai
+TF Srivichai Bol
+TF Srivichai Bol Ita
+TF Srivichai Ita
+TF Uthong
+TF Uthong Bol
+TF Uthong Bol Ita
+TF Uthong Ita
+THA0001
+THA0002
+THA0003
+THA0004
+THA0005
+THA0006
+THA0007
+THA0008
+THA0011
+THA0012
+THA0013
+THA0014
+THA0015
+THA0016
+THA0017
+THA0018
+THA0019
+THA0020
+THA0021
+THA0022
+THA0023
+THA0024
+THA0025
+THA0026
+THA0027
+THA0028
+THA0029
+THA0030
+TH Baijam
+TH Baijam Bold
+TH Baijam Bold Italic
+TH Baijam Italic
+TH Chakra Petch
+TH Chakra Petch Bold
+TH Chakra Petch Bold Italic
+TH Chakra Petch Italic
+TH Charm of AU
+TH Charmonman
+TH Charmonman Bold
+TH Fahkwang
+TH Fahkwang Bold
+TH Fahkwang Bold Italic
+TH Fahkwang Italic
+TH K2D July8
+TH K2D July8 Bold
+TH K2D July8 Bold Italic
+TH K2D July8 Italic
+TH Kodchasal
+TH Kodchasal Bold
+TH Kodchasal Bold Italic
+TH Kodchasal Italic
+TH KoHo
+TH KoHo Bold
+TH KoHo Bold Italic
+TH KoHo Italic
+TH Krub
+TH Krub Bold
+TH Krub Bold Italic
+TH Krub Italic
+TH Mali Grade6
+TH Mali Grade6 Bold
+TH Mali Grade6 Bold Italic
+TH Mali Grade6 Italic
+TH Niramit AS
+TH Niramit AS-IT๙ Bold Italic
+TH Niramit AS Bold
+TH Niramit AS Bold Italic
+TH Niramit AS Italic
+TH NiramitIT๙
+TH NiramitIT๙ Bold
+TH NiramitIT๙ Italic
+TH Srisakdi
+TH Srisakdi Bold
+times
+timesbd
+timesbi
+timesi
+trebuc
+trebucbd
+trebucbi
+trebucit
+unispace bd
+upcdb
+upcdbi
+upcdi
+upcdl
+upceb
+upcebi
+upcei
+upcel
+upcfb
+upcfbi
+upcfi
+upcfl
+upcib
+upcibi
+upcii
+upcil
+upcjb
+upcjbi
+upcji
+upcjl
+upckb
+upckbi
+upcki
+upckl
+upclb
+upclbi
+upcli
+upcll
+verdana
+verdanab
+verdanai
+verdanaz
+webdings
+wingding</pre>
+    </details>
+</section>
+</main>
+<footer class="bg-white border-t border-gray-200 mt-8">
+    <div class="max-w-7xl mx-auto px-4 py-6 text-center text-sm text-gray-500">
+        &copy; 2026 FontSeller &middot;
+        <a href="https://github.com/9PONx/fontSeller" target="_blank" rel="noopener" class="text-brand-600 hover:underline">GitHub</a>
+        &middot; โปรเจกต์ PHP (Laragon + InwCloud) &middot;
+        ฟอนต์ทั้งหมดมีสิทธิ์การเผยแพร่ตามที่เจ้าของลิขสิทธิ์อนุญาต
+    </div>
+</footer>
+<script>
+var ALL_FONTS = (function () {
+    var el = document.getElementById('fontNames');
+    return el.innerText.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+})();
+
+function fallbackCopy(text, done) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); done(); } catch (e) { /* ignore */ }
+    ta.remove();
+}
+function copyFontList() {
+    var text = document.getElementById('fontNames').innerText;
+    var btn = document.getElementById('copyBtn');
+    var done = function () {
+        btn.textContent = 'คัดลอกแล้ว ✓';
+        setTimeout(function () { btn.textContent = '📋 คัดลอกชื่อทั้งหมด'; }, 2000);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(function () { fallbackCopy(text, done); });
+    } else {
+        fallbackCopy(text, done);
+    }
+}
+
+(function () {
+    var input = document.getElementById('fontSearch');
+    var clearBtn = document.getElementById('searchClear');
+    var status = document.getElementById('searchStatus');
+    var pre = document.getElementById('fontNames');
+    var summaryCount = document.getElementById('fontSummaryCount');
+    var hint = document.getElementById('fontCountHint');
+
+    function render(list) {
+        pre.textContent = list.join('\n');
+        summaryCount.textContent = list.length.toLocaleString('th-TH');
+        hint.textContent = 'รวม ' + ALL_FONTS.length.toLocaleString('th-TH') + ' ฟอนต์ (TTF 2,982 + OTF 424)' +
+            (list.length !== ALL_FONTS.length ? ' — แสดง ' + list.length.toLocaleString('th-TH') + ' รายการ' : '');
+    }
+
+    function doSearch(q) {
+        q = q.trim().toLowerCase();
+        if (!q) {
+            status.classList.add('hidden');
+            clearBtn.classList.add('hidden');
+            render(ALL_FONTS);
+            return;
+        }
+        var matches = ALL_FONTS.filter(function (name) { return name.toLowerCase().indexOf(q) !== -1; });
+        var limit = 1000;
+        var shown = matches.slice(0, limit);
+        status.classList.remove('hidden');
+        if (matches.length === 0) {
+            status.textContent = 'ไม่พบฟอนต์ที่ตรงกับ "' + q + '"';
+            status.className = 'text-xs mt-1.5 text-red-600';
+        } else {
+            status.textContent = 'พบ ' + matches.length.toLocaleString('th-TH') + ' ฟอนต์' + (matches.length > limit ? ' (แสดง ' + limit + ' รายการแรก)' : '');
+            status.className = 'text-xs mt-1.5 text-gray-500';
+        }
+        clearBtn.classList.remove('hidden');
+        render(shown);
+    }
+
+    input.addEventListener('input', function () { doSearch(input.value); });
+    clearBtn.addEventListener('click', function () {
+        input.value = '';
+        doSearch('');
+        input.focus();
+    });
+    render(ALL_FONTS);
+})();
+</script>
+</body>
+</html>
