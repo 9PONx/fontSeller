@@ -47,7 +47,7 @@ async function renderHome() {
             <p class="text-sm text-gray-500 mt-1">ไฟล์ OTF</p>
         </div>
         <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 text-center">
-            <p class="text-3xl font-extrabold text-brand-600">~${(s.totalSizeMB / 1048576).toFixed(0)} MB</p>
+            <p class="text-3xl font-extrabold text-brand-600">~${s.totalSizeMB.toFixed(0)} MB</p>
             <p class="text-sm text-gray-500 mt-1">ขนาดไฟล์ดาวน์โหลด</p>
         </div>`;
 
@@ -92,7 +92,7 @@ async function renderHome() {
     <!-- Live preview (sample fonts) -->
     <section id="preview" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-2">ลองพิมพ์ดูตัวอย่างฟอนต์</h2>
-        <p class="text-center text-sm text-gray-500 mb-6">ตัวอย่างฟอนต์ลิขสิทธิ์ฟรี 9 แบบ — ชุดเต็ม 3,406 ฟอนต์ใช้ได้หลังชำระเงิน</p>
+        <p class="text-center text-sm text-gray-500 mb-6">ตัวอย่างฟอนต์ลิขสิทธิ์ฟรี 9 แบบ — ไฟล์ดาวน์โหลดมี ${formatCount(s.packCount)} ฟอนต์โอเพนไลเซนส์</p>
         <div class="mb-5">
             <input id="previewText" type="text" maxlength="${CONFIG.previewMaxText}" value="สวัสดี FontSeller 123"
                    class="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500">
@@ -694,9 +694,9 @@ async function renderSuccess(params) {
                     class="inline-flex items-center gap-2 bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors">
                     ⬇ ดาวน์โหลดชุดฟอนต์
                 </button>
-                <p class="text-xs text-gray-500 mt-3">${escapeHtml(CONFIG.demoZipName)} (ชุดตัวอย่างฟรี 10 ฟอนต์ — ชุดเต็ม 455MB มีเฉพาะเวอร์ชัน PHP)</p>
+                <p class="text-xs text-gray-500 mt-3">${escapeHtml(CONFIG.fullZipName)} (${formatCount(Fonts.stats.packCount)} ฟอนต์โอเพนไลเซนส์ · ขนาดไฟล์ต้นฉบับรวม ${Fonts.stats.totalSizeMB.toFixed(2)} MB)</p>
             </div>
-            <div id="dlProgress" class="hidden text-sm text-gray-500 mt-3">กำลังสร้างไฟล์ ZIP...</div>
+            <div id="dlProgress" class="hidden text-sm text-gray-500 mt-3">กำลังเริ่มดาวน์โหลด ZIP...</div>
             <div id="dlError" class="hidden text-sm text-red-600 mt-3"></div>
         </div>
         <a href="#/" class="inline-block mt-6 text-brand-600 hover:underline">กลับไปหน้าหลัก</a>
@@ -717,8 +717,7 @@ async function renderSuccess(params) {
             if (!Downloads.consume(auth.token.id)) {
                 throw new Error('ลิงก์ดาวน์โหลดไม่ถูกต้อง หมดอายุ หรือใช้งานครบจำนวนแล้ว');
             }
-            const blob = await Downloads.buildSampleZip();
-            Downloads.triggerDownload(blob, CONFIG.demoZipName);
+            Downloads.triggerFileDownload(CONFIG.fullZipUrl, CONFIG.fullZipName);
             progress.textContent = 'ดาวน์โหลดสำเร็จ ✓ (เหลือ ' + (auth.token.max_downloads - auth.token.download_count) + ' ครั้ง)';
         } catch (err) {
             errorEl.textContent = err.message;

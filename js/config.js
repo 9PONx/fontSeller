@@ -22,7 +22,8 @@ const CONFIG = {
     // --- Downloads ---
     downloadTtlHours: 24,
     downloadMaxCount: 3,
-    demoZipName: 'fontseller-demo-fonts.zip',
+    fullZipUrl: 'downloads/fontseller-open-fonts.zip',
+    fullZipName: 'fontseller-open-fonts.zip',
 
     // --- Storage keys ---
     keyOrders: 'fontseller.orders',

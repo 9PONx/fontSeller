@@ -1,5 +1,5 @@
 /**
- * FontSeller — download tokens (mirrors PHP downloads.php) + sample pack zip
+ * FontSeller — download tokens and static archive delivery
  */
 'use strict';
 
@@ -58,34 +58,17 @@ const Downloads = {
         ) === 1;
     },
 
-    /* ---------------- sample pack ---------------- */
+    /* ---------------- file delivery ---------------- */
 
-    /** Builds a ZIP of the bundled sample fonts using JSZip (loaded from CDN). */
-    async buildSampleZip() {
-        if (typeof JSZip === 'undefined') {
-            throw new Error('JSZip library not loaded');
-        }
-        const zip = new JSZip();
-        const defs = Fonts.sampleFontDefs();
-        const seen = new Set();
-        for (const def of defs) {
-            for (const file of def.files) {
-                const name = file.split('/').pop();
-                if (seen.has(name)) continue;
-                seen.add(name);
-                const res = await fetch(file);
-                if (!res.ok) continue;
-                zip.file(name, await res.arrayBuffer());
-            }
-        }
-        // Include the full font name list too
-        if (Fonts.stats) {
-            zip.file('all-font-names.txt', Fonts.stats.supportedNames.join('\n'));
-        }
-        const blob = await zip.generateAsync({ type: 'blob' });
-        return blob;
+    triggerFileDownload(url, filename) {
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.rel = 'noopener';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
     },
-
     triggerDownload(blob, filename) {
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
