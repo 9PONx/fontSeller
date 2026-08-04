@@ -1,84 +1,68 @@
-# FontSeller — ร้านขายชุดฟอนต์ 100 บาท
+# FontSeller — ร้านขายชุดฟอนต์ 100 บาท (เวอร์ชัน JavaScript)
 
-เว็บ PHP ธรรมดา (ไม่มี framework, ไม่ต้องใช้ Composer) เก็บข้อมูลเป็นไฟล์ JSON ทั้งหมด
-แสดงตัวอย่างฟอนต์จาก `C:\Windows\Fonts` ด้วย GD และขายชุด ZIP ราคา 100 บาท ผ่าน InwCloud (PromptPay / TrueMoney)
+ร้านขายชุดฟอนต์ไทยและอังกฤษ 100 บาท — **รันบน static hosting (GitHub Pages) ได้ทั้งหมด** ไม่ต้องใช้เซิร์ฟเวอร์ PHP
+
+เดิมโปรเจกต์เขียนด้วย PHP (Laragon + GD + InwCloud API) แล้วแปลงเป็น **JavaScript (SPA) ล้วน** ตามโจทย์ "แปลง PHP เป็น JavaScript ให้หมด"
+
+## ทดลองเล่นได้เลย
+
+- **GitHub Pages:** https://9ponx.github.io/fontSeller/
+- หรือเปิด `index.html` ผ่าน static server ใดก็ได้ (เช่น `python -m http.server`)
+
+## ฟีเจอร์
+
+| ฟีเจอร์ | เวอร์ชัน PHP (เดิม) | เวอร์ชัน JS (ใหม่) |
+|---|---|---|
+| หน้าแรก + รายชื่อฟอนต์ 3,406 ชื่อ + ค้นหา | PHP render + AJAX | client-side จาก `data/fonts.json` |
+| ตัวอย่างฟอนต์ | GD สร้าง PNG จากฟอนต์ Windows | FontFace + ฟอนต์ตัวอย่าง OFL 9 แบบ |
+| คำสั่งซื้อ / ข้อมูล | ไฟล์ JSON บนเซิร์ฟเวอร์ | localStorage |
+| ชำระเงิน PromptPay QR | InwCloud API (curl) | InwCloud API (fetch, เรียกจริงจาก browser) |
+| TrueMoney Wallet | InwCloud API (curl) | InwCloud API (fetch) |
+| ดาวน์โหลด ZIP | สตรีม `all-fonts.zip` 455MB | สร้าง ZIP ชุดตัวอย่าง 2.4MB ด้วย JSZip |
+| โทเค็นดาวน์โหลด (24 ชม. / 3 ครั้ง) | ไฟล์ JSON + session | localStorage + token hash |
+
+> ⚠️ **ข้อจำกัด static host:** ไฟล์ฟอนต์เต็มชุด (455MB จาก `C:\Windows\Fonts`) ไม่สามารถฝังใน GitHub Pages ได้ — หน้าดาวน์โหลดจึงแจก **ชุดตัวอย่างฟรี (OFL/Apache)** แทน ส่วนการเรียก InwCloud API จริงจาก browser อาจถูก CORS บล็อกในบางกรณี ระบบจะมี **โหมดทดลอง (Demo)** ให้กดจำลองยอดชำระได้เสมอ
 
 ## โครงสร้าง
 
 ```
 FontSeller/
-|-- bin/scan-fonts.php      # สร้าง index ฟอนต์ลง storage/data/fonts.json
-|-- inc/                    # โค้ด PHP ธรรมดา (functions)
-|   |-- bootstrap.php       # รวมไฟล์ทั้งหมด + ตรวจ .env
-|   |-- config.php          # โหลด .env
-|   |-- storage.php         # อ่าน/เขียน JSON
-|   |-- fonts.php           # ค้นหา + สแกนฟอนต์
-|   |-- orders.php          # คำสั่งซื้อ
-|   |-- payments.php        # InwCloud + demo mode
-|   |-- preview.php         # สร้างภาพตัวอย่างฟอนต์ (GD)
-|   |-- downloads.php       # โทเคนดาวน์โหลด
-|   `-- layout.php          # header/footer
-|-- public/                 # web root เท่านั้นที่เข้าเว็บได้
-|   |-- index.php           # landing page: จำนวนฟอนต์ + รายชื่อทั้งหมด
-|   |-- checkout.php        # ฟอร์มสั่งซื้อ
-|   |-- pay.php             # หน้าชำระเงิน (PromptPay QR / TrueMoney)
-|   |-- success.php         # หน้าดาวน์โหลดหลังชำระสำเร็จ
-|   |-- download.php        # สตรีมไฟล์ ZIP
-|   |-- api/preview.php     # API รูปตัวอย่าง (PNG)
-|   |-- api/status.php      # API ตรวจสถานะ PromptPay
-|   |-- api/truemoney.php   # API แลกซอง TrueMoney
-|   `-- assets/app.js       # โหลดตัวอย่างฟอนต์ + poll สถานะ
-|-- storage/
-|   |-- data/               # fonts.json, orders.json, ...
-|   |-- cache/previews/     # ภาพตัวอย่างที่ cache ไว้
-|   `-- private/products/all-fonts.zip   # ไฟล์ขาย (เจ้าของวางเอง)
-`-- .env
+|-- index.html            # SPA shell (hash router: #/, #/checkout, #/pay, #/success)
+|-- js/
+|   |-- config.js         # ค่าตั้ง: InwCloud API key, ราคา 100฿, ขีดจำกัดดาวน์โหลด
+|   |-- store.js          # localStorage store + orders (แปลงจาก storage.php/orders.php)
+|   |-- fonts.js          # แคตตาล็อกฟอนต์ + ค้นหา + โหลดฟอนต์ตัวอย่าง (แปลงจาก fonts.php/preview.php)
+|   |-- payments.js       # InwCloud client + ตรวจยอด (แปลงจาก payments.php)
+|   |-- downloads.js      # โทเค็นดาวน์โหลด + สร้าง ZIP (แปลงจาก downloads.php)
+|   |-- router.js         # hash router
+|   `-- app.js            # views: home/checkout/pay/success (แปลงจาก public/*.php)
+|-- data/fonts.json       # แคตตาล็อกฟอนต์ 3,406 ตัว (สแกนจาก C:\Windows\Fonts)
+|-- fonts/                # ฟอนต์ตัวอย่างลิขสิทธิ์ฟรี 11 ไฟล์ (OFL/Apache)
+|-- tests/e2e.test.js     # E2E test (Playwright)
+|-- docs/inwcloud/        # คู่มือ API ของ InwCloud
+`-- .nojekyll             # ให้ GitHub Pages เสิร์ฟไฟล์ตรง ๆ
 ```
 
-## ติดตั้ง
+## ชำระเงินจริง (InwCloud)
 
-1. คัดลอก `.env.example` → `.env` แล้วตั้งค่า
-   - `APP_KEY` = 64 ตัวอักษร hex (เช่น `php -r "echo bin2hex(random_bytes(32));"`)
-   - `INWCLOUD_API_KEY` = คีย์จริงจาก InwCloud
-   - `STORAGE_PATH` = ไว้ที่โฟลเดอร์ `storage/data`
+- `POST /v1/promptpay/generate` — สร้าง QR PromptPay (ยอด 100฿ + ค่าธรรมเนียมช่องทาง)
+- `POST /v1/promptpay/check` — ตรวจสถานะการจ่าย (poll ทุก 5 วินาที)
+- `POST /v1/truewallet/redeem` — แลกซองของขวัญ TrueMoney (รับเฉพาะ 100฿ พอดี)
 
-2. สร้าง index ฟอนต์ (รันทุกครั้งที่ฟอนต์เปลี่ยน):
+API key อยู่ใน `js/config.js` — เพราะ static site ไม่มีเซิร์ฟเวอร์ซ่อน key ได้ (หากต้องการความปลอดภัยสูง ต้องย้ายไป proxy/server)
+
+## วิธีรันทดสอบ
 
 ```bash
-php bin/scan-fonts.php
-# ผลลัพธ์: seen=3625 inserted=3625 ... supported=3406 unsupported=219 errors=0
+# static server
+python -m http.server 8123
+# เปิด http://127.0.0.1:8123/
+
+# E2E test (ต้องติดตั้ง playwright: npm i playwright)
+NODE_PATH=$(npm root -g) node tests/e2e.test.js
 ```
 
-3. สร้างไฟล์สินค้า (ZIP ชุดฟอนต์) จากฟอนต์ที่สแกนไว้:
+## License
 
-```bash
-php bin/build-zip.php            # สร้างถ้ายังไม่มี
-php bin/build-zip.php --force    # สร้างใหม่ทุกครั้ง (ควรทำหลัง scan ฟอนต์ใหม่)
-# ผลลัพธ์: added=3406 skipped=0 size=454.3 MB stored at: ...\storage\private\products\all-fonts.zip
-```
-
-   ต้องการ ext/zip (ZipArchive) — เปิดใน php.ini: `extension=zip`
-   (ถ้าอยากวาง ZIP เองก็ได้: ใส่ไฟล์ที่ `storage/private/products/all-fonts.zip`)
-
-4. ชี้ document root ของ Laragon ไปที่ `C:\laragon\www\FontSeller\public`
-
-5. ทดสอบ: `php -S 127.0.0.1:8080 -t public`
-
-## การขึ้น Production
-
-- `APP_ENV=production`, `APP_SESSION_SECURE=true`, `APP_URL=https://...` (HTTPS)
-- ตั้ง `APP_KEY` 64 ตัวอักษร hex: `php -r "echo bin2hex(random_bytes(32));"`
-- ใส่ `INWCLOUD_API_KEY` จริงจาก InwCloud
-- ตรวจสอบว่า `INWCLOUD_QR_IMAGE_HOST=api.qrserver.com` ตรงกับ host ของ QR ที่ InwCloud คืนมา
-- ทดสอบ PromptPay 100 บาทจริง และ TrueMoney 100 บาทจริง อย่างละ 1 ครั้งก่อนเปิด
-- ระบบจะปลดล็อกไฟล์เมื่อ InwCloud ยืนยันยอด **10000 สตางค์ (100 บาท) พอดี** เท่านั้น
-
-## ฟีเจอร์
-
-- Landing page แสดงจำนวนฟอนต์ทั้งหมด (TTF/OTF) แยกตามรูปแบบ + รายชื่อฟอนต์แบบ plain text
-- ฟอนต์ที่สแกน: เฉพาะ TTF/OTF อยู่ในชุดขาย, TTC/FON ไม่รองรับ
-- ชำระเงิน PromptPay QR หรือ TrueMoney Wallet ราคา 100 บาทพอดี
-- ดาวน์โหลด ZIP ได้ 3 ครั้งภายใน 24 ชั่วโมง (เก็บแค่ hash ของโทเคน)
-- เมื่อฟอนต์เปลี่ยน ให้รัน `php bin/scan-fonts.php && php bin/build-zip.php --force` (build เขียนไฟล์ชั่วคราวแล้ว rename ทับแบบ atomic — ลูกค้าที่ดาวน์โหลดอยู่ไม่โดนไฟล์ครึ่งๆ กลางๆ)
-- ถ้า session หายหลังจ่ายเงิน (เปิดลิงก์ในเครื่องอื่น/ล้างคุกกี้) หน้ายืนยันจะออกลิงก์ใหม่ให้อัตโนมัติ โดยลิงก์เก่าจะใช้ไม่ได้
-- ไฟล์ `.env`, ฟอนต์ต้นฉบับ, ZIP ไม่ถูกเข้าถึงผ่านเว็บได้
+- ฟอนต์ตัวอย่างใน `/fonts` เป็นลิขสิทธิ์ฟรี (SIL OFL / Apache 2.0)
+- ฟอนต์ทั้งชุดมีสิทธิ์การเผยแพร่ตามที่เจ้าของลิขสิทธิ์อนุญาต
